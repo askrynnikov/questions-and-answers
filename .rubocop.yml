@@ -1,0 +1,70 @@
+# run 'rubocop --auto-gen-config'    write to .rubocop-todo.yml
+# inherit_from: .rubocop_todo.yml
+AllCops:
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - !ruby/regexp /old_and_unused\.rb$/
+
+# дает ошибку if spring = lockfile.specs.detect { |spec| spec.name == "spring" }
+Lint/AssignmentInCondition:
+  Exclude:
+    - bin/spring
+
+# генератор добавляет пустые строки
+Style/EmptyLinesAroundClassBody:
+  Exclude:
+    - test/controllers/*.rb
+
+# сгенерировано class ActiveSupport::TestCase
+Style/ClassAndModuleChildren:
+  Exclude:
+    - test/test_helper.rb
+
+# в сгенерированных миграциях с одной строкой использует блок
+Style/SymbolProc:
+  IgnoredMethods:
+    - create_table
+
+# в сгенерированных миграциях пустой строкой отделяется t.timestamps
+Style/EmptyLinesAroundBlockBody:
+  Exclude:
+    - db/migrate/*.rb
+
+# в контроллерах может быть множество пустых методов
+Style/EmptyMethod:
+  Exclude:
+    - app/controllers/**/*.rb
+
+# генератор создающий .jbuilder не добавляет пустую строку
+Style/TrailingBlankLines:
+  Exclude:
+    - app/views/**/*.jbuilder
+
+Style/StringLiterals:
+  Enabled: false
+#  EnforcedStyle: single_quotes
+#  SupportedStyles:
+#    - single_quotes
+#    - double_quotes
+
+
+Metrics/LineLength:
+  Enabled: false
+#  Max: 100
+
+# Error -> Missing top-level class documentation comment.
+Style/Documentation:
+  Enabled: false
+
+# Error -> Missing frozen string literal comment.
+#This cop is designed to help upgrade to Ruby 3.0.
+#It will add the comment `# frozen_string_literal: true` to the top of files to enable frozen string literals.
+#Frozen string literals will be default in Ruby 3.0. The comment will be added below a shebang and encoding comment.
+#The frozen string literal comment is only valid in Ruby 2.3+.
+Style/FrozenStringLiteralComment:
+  Enabled: false

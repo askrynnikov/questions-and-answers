@@ -6,7 +6,7 @@ RSpec.describe Answer, type: :model do
   end
 
   it do
-    should belong_to(:question).
-      with_foreign_key('question_id')
+    should belong_to(:question)
+             .with_foreign_key('question_id')
   end
 end
