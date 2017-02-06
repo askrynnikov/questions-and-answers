@@ -1,12 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Answer, type: :model do
-  it do
-    should validate_presence_of(:body)
+  describe 'associations' do
+    it do
+      should belong_to(:question)
+               .with_foreign_key('question_id')
+    end
   end
 
-  it do
-    should belong_to(:question)
-             .with_foreign_key('question_id')
+  describe 'validations' do
+    it { should validate_presence_of(:body) }
+    it { should validate_presence_of(:question_id) }
   end
 end
