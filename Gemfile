@@ -56,3 +56,13 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 end
+
+# более старшая версия 0.19.2-0.19.4 вызывает предупреждение https://github.com/erikhuda/thor/issues/538
+# Expected string default value for '--jbuilder'; got true (boolean)
+# Expected string default value for '--helper'; got true (boolean)
+# Expected string default value for '--assets'; got true (boolean)
+gem 'thor', '0.19.1'
+
+group :test do
+  gem 'shoulda-matchers'
+end
