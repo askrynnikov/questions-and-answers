@@ -2,11 +2,18 @@
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}"
-  it { should validate_presence_of(:title) }
-  it { should validate_presence_of(:body) }
+  describe 'associations' do
+    it do
+      should have_many(:answers)
+               .dependent(:destroy)
+    end
+  end
 
-  it { should have_many(:answers) }
+  describe 'validations' do
+    it { should validate_presence_of(:title) }
+    it { should validate_presence_of(:body) }
+  end
+
 
   # it 'validates presence of title' do
   #   expect(Question.new(body: '123')).to_not be_valid
