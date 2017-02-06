@@ -55,6 +55,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :test, :development do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'rubocop', require: false
 end
 
 # более старшая версия 0.19.2-0.19.4 вызывает предупреждение https://github.com/erikhuda/thor/issues/538
