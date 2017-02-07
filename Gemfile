@@ -67,4 +67,5 @@ gem 'thor', '0.19.1'
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'rails-controller-testing'
 end
