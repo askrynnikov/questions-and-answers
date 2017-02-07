@@ -1,8 +1,8 @@
 example_id                            | status | run_time        |
 ------------------------------------- | ------ | --------------- |
 ./spec/models/answer_spec.rb[1:1:1]   | passed | 0.00208 seconds |
-./spec/models/answer_spec.rb[1:2:1]   | passed | 0.00433 seconds |
-./spec/models/answer_spec.rb[1:2:2]   | passed | 0.02782 seconds |
-./spec/models/question_spec.rb[1:1:1] | passed | 0.00208 seconds |
-./spec/models/question_spec.rb[1:2:1] | passed | 0.01397 seconds |
-./spec/models/question_spec.rb[1:2:2] | passed | 0.00341 seconds |
+./spec/models/answer_spec.rb[1:2:1]   | passed | 0.01334 seconds |
+./spec/models/answer_spec.rb[1:2:2]   | passed | 0.00355 seconds |
+./spec/models/question_spec.rb[1:1:1] | passed | 0.01306 seconds |
+./spec/models/question_spec.rb[1:2:1] | passed | 0.00837 seconds |
+./spec/models/question_spec.rb[1:2:2] | passed | 0.01105 seconds |
