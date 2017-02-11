@@ -1,4 +1,6 @@
 RSpec.describe QuestionsController, type: :controller do
+  let(:question) { create(:question) }
+
   describe 'GET #index' do
     let(:questions) { create_list(:question, 2) }
 
@@ -16,8 +18,6 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'GET #show' do
-    let(:question) { create(:question) }
-
     before { get :show, params: { id: question } }
 
     it 'assigns the requested question to @question' do
@@ -42,8 +42,6 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'GET #edit' do
-    let(:question) { create(:question) }
-
     before { get :edit, params: { id: question } }
 
     it 'assigns the requested question to @question' do
@@ -52,6 +50,22 @@ RSpec.describe QuestionsController, type: :controller do
 
     it 'render edit view' do
       expect(response).to render_template :edit
+    end
+  end
+
+  describe 'POST #create' do
+    context 'with valid attributes' do
+      it 'saves the new question in the database' do
+        old_count = Question.count
+        post :create, question: attributes_for(:question)
+        expect(Question.count).to eq old_count + 1
+      end
+      it 'redirect to show view'
+    end
+
+    context 'with invalid attributes' do
+      it 'saves the new question in the database'
+      it 'redirect to show view'
     end
   end
 end
