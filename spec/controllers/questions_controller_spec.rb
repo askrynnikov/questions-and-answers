@@ -58,12 +58,15 @@ RSpec.describe QuestionsController, type: :controller do
       it 'saves the new question in the database' do
         expect { post :create, question: attributes_for(:question) }.to change(Question, :count).by(1)
       end
-      it 'redirect to show view'
+      it 'redirect to show view' do
+        post :create, question: attributes_for(:question)
+        expect(response).to redirect_to question_path(assigns(:question))
+      end
     end
 
-    context 'with invalid attributes' do
-      it 'saves the new question in the database'
-      it 'redirect to show view'
-    end
+    # context 'with invalid attributes' do
+    #   it 'saves the new question in the database'
+    #   it 'redirect to show view'
+    # end
   end
 end
