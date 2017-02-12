@@ -7,8 +7,8 @@ RSpec.describe AnswersController, type: :controller do
     before { get :new, params: { :question_id => answer.question_id } }
 
     it 'assigns a new Answer to @answer' do
-      # answer1 = FactoryGirl.create(:answer)
-      # get :new, params: { :question_id => answer1.question_id }
+      # answer = FactoryGirl.create(:answer)
+      # get :new, params: { :question_id => answer.question_id }
       expect(assigns(:answer)).to be_a_new(Answer)
     end
 
@@ -18,13 +18,15 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'POST #create' do
+    before { answer }
+
     context 'with valid attributes' do
       it 'saves the new answer in the database' do
         expect { post :create, params: { answer: attributes_for(:answer), :question_id => answer.question_id } }.to change(Answer, :count).by(1)
       end
       it 'redirect to show view' do
         post :create, params: { answer: attributes_for(:answer), :question_id => answer.question_id }
-        expect(response).to redirect_to answer_path(assigns(:answer))
+        expect(response).to redirect_to answer.question
       end
     end
 
