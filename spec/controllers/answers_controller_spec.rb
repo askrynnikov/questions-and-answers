@@ -13,8 +13,11 @@ RSpec.describe AnswersController, type: :controller do
       expect(assigns(:answer)).to be_a_new(Answer)
     end
 
-    # it 'render new view' do
-    #   expect(response).to render_template :new
-    # end
+    it 'render new view' do
+      answer1 = FactoryGirl.create(:answer)
+
+      get :new, params: { :question_id => answer1.question_id }
+      expect(response).to render_template :new
+    end
   end
 end
