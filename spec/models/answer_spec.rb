@@ -2,7 +2,6 @@ RSpec.describe Answer, type: :model do
   describe 'associations' do
     it do
       should belong_to(:question)
-               .with_foreign_key('question_id')
     end
   end
 
