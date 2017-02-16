@@ -5,11 +5,12 @@ RSpec.feature 'Index questions', %q{
   given(:questions) { create_list(:question, 2) }
 
   scenario 'Authenticated user creates question' do
+    questions
     visit questions_path
     # save_and_open_page
 
     expect(page).to have_content 'Title question'
-    # expect(page).to have_content 'Body question'
+    expect(page).to have_content 'Body question'
   end
 end
 
