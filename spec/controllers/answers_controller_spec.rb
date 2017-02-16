@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe AnswersController, type: :controller do
   let(:answer) { create(:answer) }
