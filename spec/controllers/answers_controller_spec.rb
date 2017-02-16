@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe AnswersController, type: :controller do
   let(:answer) { create(:answer) }
   let(:question) { create(:question) }
@@ -10,7 +8,7 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'GET #new' do
-    before { get :new, params = { question_id: answer.question_id } }
+    before { get :new, params: { question_id: answer.question_id } }
 
     it 'assigns a new Answer to @answer' do
       # answer = FactoryGirl.create(:answer)

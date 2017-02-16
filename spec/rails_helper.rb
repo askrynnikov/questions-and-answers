@@ -26,9 +26,26 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+# Все с ошибками !!!
+# class ActionController::TestCase
+#   include Devise::TestHelpers
+# end
+#
+# # вроде должно устареть
+# class ActionController::TestCase
+#   include Devise::Test::ControllerHelpers
+# end
+#
+# class ActionDispatch::IntegrationTest
+#   include Devise::Test::IntegrationHelpers
+# end
+
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
-  config.include Devise::TestHelpers, type: :controller
+  # config.include Devise::Test::IntegrationHelpers # Devise::MissingWarden:
+  config.include Devise::TestHelpers, type: :controller # устаревает (но сейчас работает)
+  # config.include Devise::Test::ControllerHelpers # Failure/Error: @request.env['action_controller.instance'] = @controller
+
   config.extend ControllerMacros, type: :controller
   # config.include ActionController, type: :feature
   config.include AcceptanceHelper, type: :feature
