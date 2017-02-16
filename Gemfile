@@ -39,6 +39,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'slim-rails'
 
+gem 'devise'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
@@ -72,4 +74,6 @@ gem 'thor', '0.19.1'
 group :test do
   gem 'shoulda-matchers'
   gem 'rails-controller-testing'
+  gem 'capybara'
+  gem 'launchy'
 end
