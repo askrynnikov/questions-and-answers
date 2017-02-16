@@ -1,1 +1,23 @@
-p= link_to 'Ask question', new_question_path
+h1 List question
+
+table
+  thead
+    tr
+      th Title
+      th Question
+      th
+      th
+      th
+
+  tbody
+    - @questions.each do |question|
+      tr
+        td = question.title
+        td = question.body
+        td = link_to 'Show', question
+        td = link_to 'Edit', edit_question_path(question)
+        td = link_to 'Destroy', question, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'Ask question', new_question_path
