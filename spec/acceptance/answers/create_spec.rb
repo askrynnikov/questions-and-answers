@@ -8,7 +8,7 @@ I want to be able to give an answer
   given(:question) {create(:question)}
 
   scenario 'Authenticated user creates answer' do
-    sign_in_a(user)
+    sign_in(user)
 
     visit question_path(question.id)
     answer_body = Faker::Lorem.paragraph

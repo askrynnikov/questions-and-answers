@@ -1,5 +1,5 @@
 module AcceptanceHelper
-  def sign_in_a(user)
+  def sign_in(user)
     visit new_user_session_path #'/sign_in'
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password

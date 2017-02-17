@@ -7,7 +7,7 @@ RSpec.feature 'User sign in', %q{
   given(:user) {create(:user)}
 
   scenario 'Registered user try to sign in' do
-    sign_in_a(user)
+    sign_in(user)
 
     expect(page).to have_content 'Signed in successfully.'
     expect(current_path).to eq root_path
