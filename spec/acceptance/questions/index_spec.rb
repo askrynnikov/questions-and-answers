@@ -1,16 +1,20 @@
 RSpec.feature 'Index questions', %q{
-  You can view a list of questions
+in order To read the questions
+As a user
+It has the ability to view issues
 } do
 
   given(:questions) { create_list(:question, 2) }
 
-  scenario 'Authenticated user creates question' do
+  scenario 'User views question' do
     questions
     visit questions_path
     # save_and_open_page
 
-    expect(page).to have_content 'Title question'
-    expect(page).to have_content 'Body question'
+    expect(page).to have_content questions[0].title
+    expect(page).to have_content questions[0].body
+    expect(page).to have_content questions[1].title
+    expect(page).to have_content questions[1].body
   end
 end
 
