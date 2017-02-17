@@ -1,0 +1,14 @@
+h1 = @question.title
+p  = @question.body
+
+- if @question.answers.any?
+  h2 Answers:
+  - @question.answers.each do |answer|
+      div.answer_body
+      = answer.body
+br
+- if user_signed_in?
+  = form_for [@question, @question.answers.build] do |f|
+    = f.submit 'Your Answer'
+    br
+    = f.text_area :body
