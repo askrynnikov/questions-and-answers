@@ -12,7 +12,7 @@ table
   tbody
     - @questions.each do |question|
       tr
-        td = question.title
+        td = link_to question.title, question
         td = question.body
         td = link_to 'Show', question
         td = link_to 'Edit', edit_question_path(question)
