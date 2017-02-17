@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :answer do
-    body "Равно 4"
+    body Faker::Lorem.paragraph
     association :question, factory: :question, title: "Тестовый вопрос", body: "Чему равно 2 * 2 ?"
   end
 
