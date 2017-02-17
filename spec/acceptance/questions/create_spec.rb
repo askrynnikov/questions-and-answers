@@ -7,7 +7,7 @@ RSpec.feature 'Create question', %q{
   given(:user) {create(:user)}
 
   scenario 'Authenticated user creates question' do
-    sign_in_a(user)
+    sign_in(user)
 
     visit questions_path
     click_on 'Ask question'
