@@ -2,6 +2,10 @@ FactoryGirl.define do
   factory :question do
     title Faker::Lorem.sentence
     body Faker::Lorem.paragraph
+
+    trait :with_answers do
+      answers { [create(:answer), create(:answer)] }
+    end
   end
 
   factory :invalid_question, class: "Question" do
