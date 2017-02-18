@@ -10,9 +10,10 @@ I want to be able to give an answer
   scenario 'Authenticated user creates answer' do
     sign_in(user)
 
-    visit question_path(question.id)
+    visit question_path(question)
     answer_body = Faker::Lorem.paragraph
     fill_in 'answer_body', with: answer_body
+
     click_on 'Your Answer'
     expect(page).to have_content 'Your answer successfully created.'
     expect(page).to have_content question.title
