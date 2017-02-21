@@ -123,15 +123,22 @@ RSpec.describe QuestionsController, type: :controller do
   describe 'DELETE #destroy' do
     before do
       question
-      sign_in(user)
     end
     it 'deletes question' do
+      sign_in(user)
       expect { delete :destroy, params: { id: question } }.to change(Question, :count).by(-1)
     end
 
     it 'redirect to index view' do
+      sign_in(user)
       delete :destroy, params: { id: question }
       expect(response).to redirect_to questions_path
+    end
+
+    it 'the user can not remove is not his own question' do
+      user2 = create(:user)
+      sign_in(user2)
+      expect { delete :destroy, params: { id: question } }.to_not change(Question, :count)
     end
   end
 end
