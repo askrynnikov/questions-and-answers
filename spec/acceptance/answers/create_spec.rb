@@ -1,5 +1,5 @@
 RSpec.feature 'Create answers', %q{
-In order that the community received a answer
+In order that the community received an answer
 As an authenticated user
 I want to be able to give an answer
 } do

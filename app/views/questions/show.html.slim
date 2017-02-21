@@ -2,13 +2,7 @@ h1 = @question.title
 p  = @question.body
 - if @question.answers.any?
   h2 Answers:
-  - @question.answers.each do |answer|
-      div.answer_body
-        = answer.body
-        - if current_user && current_user.author_of?(answer)
-          br
-          = link_to 'Delete answer', question_answer_path(@question, answer), data: { confirm: 'Are you sure?' }, method: :delete
-      br
+  = render partial: "answer", collection: @question.answers
 
 br
 - if user_signed_in?
