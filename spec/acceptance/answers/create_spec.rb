@@ -1,3 +1,5 @@
+require 'acceptance/acceptance_helper'
+
 RSpec.feature 'Create answers', %q{
 In order that the community received an answer
 As an authenticated user

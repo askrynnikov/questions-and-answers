@@ -1,3 +1,5 @@
+require 'acceptance/acceptance_helper'
+
 RSpec.feature 'Delete answer', %q{
    In order to be able delete wrong answer
    As an authenticated user

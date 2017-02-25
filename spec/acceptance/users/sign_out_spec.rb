@@ -1,3 +1,5 @@
+require 'acceptance/acceptance_helper'
+
 RSpec.feature 'User sign out', %q{
   in order to end session
   As an user

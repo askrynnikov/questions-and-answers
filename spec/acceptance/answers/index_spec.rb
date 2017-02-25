@@ -1,3 +1,5 @@
+require 'acceptance/acceptance_helper'
+
 RSpec.feature 'View answers', %q{
 The user can view the question and answers it.
 } do

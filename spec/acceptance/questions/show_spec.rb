@@ -1,3 +1,5 @@
+require 'acceptance/acceptance_helper'
+
 RSpec.feature 'Show question', %q{
   In order to get answer from community
   As an authenticated user

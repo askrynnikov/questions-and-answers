@@ -1,3 +1,5 @@
+require 'acceptance/acceptance_helper'
+
 RSpec.feature 'Index questions', %q{
 in order To read the questions
 As a user

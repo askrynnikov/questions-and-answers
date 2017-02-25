@@ -1,3 +1,5 @@
+require 'acceptance/acceptance_helper'
+
 RSpec.feature 'User sign in', %q{
   in order to be able to ask question
   As an

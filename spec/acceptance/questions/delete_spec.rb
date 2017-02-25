@@ -1,3 +1,5 @@
+require 'acceptance/acceptance_helper'
+
 RSpec.feature 'Delete question', %q{
    In order to be able delete wrong question
    As user
