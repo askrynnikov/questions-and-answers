@@ -17,6 +17,7 @@
 .byebug_history
 
 config/database.yml
+config/secrets.yml
 .idea
 
 spec/examples.txt
