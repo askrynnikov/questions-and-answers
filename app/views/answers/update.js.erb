@@ -1,0 +1,15 @@
+<% if @answer.errors.present? %>
+  <% @answer.errors.full_messages.each do |message| %>
+    $('.answer-errors').html('<%= j message %>');
+  <% end %>
+<% else %>
+  $('.answer-<%= @answer.id %>').html('<%= j render 'questions/answer', question: @question, answer: @answer %>');
+  $(edit_answer);
+//  $('.edit-answer-link').click(function (e) {
+////    alert("Тест");
+//    e.preventDefault();
+//    $(this).hide();
+//    var answer_id = $(this).data('answerId');
+//    $('form#edit-answer-' + answer_id).show()
+//  });
+<% end %>

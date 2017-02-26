@@ -1,6 +1,15 @@
-div.answer_body
-  = answer.body
-  - if current_user && current_user.author_of?(answer)
+- if answer.persisted?
+  div class="answer-#{answer.id}"
+    p= answer.body
+    /p= answer.user.email
+    /p= current_user.email
+    - if current_user && current_user.author_of?(answer)
+      /br
+      p= link_to 'Edit', '', class: 'edit-answer-link', data: {answer_id: answer.id}, remote: true
+      p= link_to 'Delete answer', question_answer_path(@question, answer), data: { confirm: 'Are you sure?' }, method: :delete
+      p
+        = form_for [@question, answer], remote: true, html: {id: "edit-answer-#{answer.id}"} do |f|
+          = f.label :body, "Answer"
+          = f.text_area :body
+          = f.submit 'Save'
     br
-    = link_to 'Delete answer', question_answer_path(@question, answer), data: { confirm: 'Are you sure?' }, method: :delete
-br

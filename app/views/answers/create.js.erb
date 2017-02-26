@@ -5,6 +5,6 @@
 <% else %>
   $('.answers').append('<%= j render 'questions/answer', question: @question, answer: @answer %>');
   //$('.answers').html('<%= j render partial: 'questions/answer', collection: @question.answers %>');
-  $('#answer_body').val('');
+  $('#new_answer #answer_body').val('');
   $('.answer-errors').html('<%= "" %>');
 <% end %>
