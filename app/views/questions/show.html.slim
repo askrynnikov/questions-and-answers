@@ -1,5 +1,6 @@
-h1 = @question.title
-p  = @question.body
+.question
+  = render partial: "question"
+
 - if @question.answers.any?
   h2 Answers:
   .answers

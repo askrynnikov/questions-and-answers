@@ -1,8 +1,8 @@
 - if answer.persisted?
   div class="answer-#{answer.id}"
     p= answer.body
-    /p= current_user.email
-    p= answer.user.email
+    //p= current_user.email
+    /p= answer.user.email
     - if current_user && current_user.author_of?(answer)
       /br
       p= link_to 'Edit', '', class: 'edit-answer-link', data: {answer_id: answer.id}, remote: true
