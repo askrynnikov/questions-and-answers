@@ -75,7 +75,16 @@ I'd like to be able to edit my answer
     scenario 'try to edit other user`s answer', js: true do
       # answer2
       # visit question_path(question)
-      save_and_open_page
+      # save_and_open_page
+      # expect(page).to have_selector(".answer_body", count: 2)
+      # expect(page).to have_selector(".edit-answer-link", count: 1)
+
+      within ".answer-#{answer.id}" do
+        expect(page).to have_content('Edit')
+      end
+      within ".answer-#{answer2.id}" do
+        expect(page).to_not have_content('Edit')
+      end
     end
   end
 end
