@@ -5,7 +5,8 @@
 <% else %>
   $('.answer-<%= @answer.id %>').html('<%= j render 'questions/answer', question: @question, answer: @answer %>');
   $(edit_answer);
-//  $('.edit-answer-link').click(function (e) {
+
+  //  $('.edit-answer-link').click(function (e) {
 ////    alert("Тест");
 //    e.preventDefault();
 //    $(this).hide();
