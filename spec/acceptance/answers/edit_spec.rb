@@ -12,7 +12,7 @@ I'd like to be able to edit my answer
   given(:user2) { create(:user) }
   given!(:answer2) { create(:answer, question: question, user: user2) }
 
-  scenario 'Unauthenticated user try to edit answer' do
+  scenario 'Unauthenticated user try to edit answer', js: true do
     visit question_path(question)
 
     expect(page).not_to have_link 'Edit'
@@ -80,10 +80,10 @@ I'd like to be able to edit my answer
       # expect(page).to have_selector(".edit-answer-link", count: 1)
 
       within ".answer-#{answer.id}" do
-        expect(page).to have_content('Edit')
+        expect(page).to have_link('Edit')
       end
       within ".answer-#{answer2.id}" do
-        expect(page).to_not have_content('Edit')
+        expect(page).to_not have_link('Edit')
       end
     end
   end
