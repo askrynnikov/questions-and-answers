@@ -85,43 +85,62 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'PATCH #update' do
     sign_in_user
-    context 'with valid attributes' do
-      it 'assigns the requested question to @question' do
-        patch :update, params: { id: question, question: attributes_for(:question) }
-        expect(assigns(:question)).to eq question
-      end
 
-      it 'change question attributes' do
-        patch :update, params: { id: question, question: { title: 'new title', body: 'new body' } }
-        question.reload
-        expect(question.title).to eq 'new title'
-        expect(question.body).to eq 'new body'
-      end
-
-      it 'redirects to the updated question' do
-        patch :update, params: { id: question, question: attributes_for(:question) }
-        expect(response).to redirect_to question
-      end
+    it 'assign the requested question to @question' do
+      patch :update, params: { id: question, question: attributes_for(:question), format: :js }
+      expect(assigns(:question)).to eq question
     end
 
-    context 'with invalid attributes' do
-      let!(:old_title) { question.title }
-      let!(:old_body) { question.body }
+    it 'changes question attributes' do
+      patch :update, params: { id: question, question: {body: 'new body', title: 'new title', }, format: :js }
+      question.reload
 
-      before {
-        patch :update, params: { id: question, question: { title: 'new title', body: '' } }
-      }
-
-      it 'does not change question attributes' do
-        question.reload
-        expect(question.title).to eq old_title
-        expect(question.body).to eq old_body
-      end
-
-      it 're-renders edit view' do
-        expect(response).to render_template :edit
-      end
+      expect(question.title).to eq 'new title'
+      expect(question.body).to eq 'new body'
     end
+
+    it 'render update template' do
+      patch :update, params: { id: question, question: attributes_for(:question), format: :js }
+      expect(response).to render_template :update
+    end
+
+    # context 'with valid attributes' do
+    #   it 'assigns the requested question to @question' do
+    #     patch :update, params: { id: question, question: attributes_for(:question) }
+    #     expect(assigns(:question)).to eq question
+    #   end
+    # 
+    #   it 'change question attributes' do
+    #     patch :update, params: { id: question, question: { title: 'new title', body: 'new body' } }
+    #     question.reload
+    #     expect(question.title).to eq 'new title'
+    #     expect(question.body).to eq 'new body'
+    #   end
+    # 
+    #   it 'redirects to the updated question' do
+    #     patch :update, params: { id: question, question: attributes_for(:question) }
+    #     expect(response).to redirect_to question
+    #   end
+    # end
+    # 
+    # context 'with invalid attributes' do
+    #   let!(:old_title) { question.title }
+    #   let!(:old_body) { question.body }
+    # 
+    #   before {
+    #     patch :update, params: { id: question, question: { title: 'new title', body: '' } }
+    #   }
+    # 
+    #   it 'does not change question attributes' do
+    #     question.reload
+    #     expect(question.title).to eq old_title
+    #     expect(question.body).to eq old_body
+    #   end
+    # 
+    #   it 're-renders edit view' do
+    #     expect(response).to render_template :edit
+    #   end
+    # end
   end
 
   describe 'DELETE #destroy' do
