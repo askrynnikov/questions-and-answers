@@ -4,13 +4,4 @@
   <% end %>
 <% else %>
   $('.answer-<%= @answer.id %>').html('<%= j render @answer %>');
-  $(edit_answer);
-
-  //  $('.edit-answer-link').click(function (e) {
-////    alert("Тест");
-//    e.preventDefault();
-//    $(this).hide();
-//    var answer_id = $(this).data('answerId');
-//    $('form#edit-answer-' + answer_id).show()
-//  });
 <% end %>

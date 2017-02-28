@@ -1,15 +1,11 @@
 .question
   = render @question
 
-- if @question.answers.any?
-  h2 Answers:
-  .answers
+.answers
+  - if @question.answers.any?
+    h2 Answers:
     = render @question.answers.ordered
 
-br
 - if user_signed_in?
-  = form_for [@question, @answer], remote: true do |f|
-    .answer-errors
-    = f.submit 'Your Answer'
-    br
-    = f.text_area :body
+  .form_add_answer
+    = render 'answers/new'

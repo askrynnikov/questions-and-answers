@@ -1,21 +1,21 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question, only: [:show, :update, :destroy]
 
   def index
     @questions = Question.all
   end
 
   def show
-    @answer = @question.answers.build
+    # @answer = @question.answers.build
   end
 
   def new
     @question = Question.new
   end
 
-  def edit
-  end
+  # def edit
+  # end
 
   def create
     @question = Question.create(questions_params)
