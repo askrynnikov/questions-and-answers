@@ -14,5 +14,3 @@ The user can view the question and answers it.
     expect(page).to have_content question.answers[1].body
   end
 end
-
-# save_and_open_page

@@ -33,4 +33,3 @@ RSpec.feature 'Delete answer', %q{
     expect(page).to_not have_link('Delete answer')
   end
 end
-# save_and_open_page

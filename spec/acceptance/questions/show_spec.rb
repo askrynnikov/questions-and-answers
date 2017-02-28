@@ -26,5 +26,3 @@ RSpec.feature 'Show question', %q{
     expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end
 end
-
-# save_and_open_page

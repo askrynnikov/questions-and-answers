@@ -34,13 +34,13 @@ I'd like to be able to edit my question
       within '.question' do
         expect(page).to_not have_selector 'textarea'
         click_on 'Edit question'
+        expect(page).to have_selector 'textarea'
       end
 
-      sleep(1)
-      save_and_open_page
-      within '.question' do
-       expect(page).to have_selector 'textarea'
-      end
+      # # sleep(1)
+      # within '.question' do
+      #  expect(page).to have_selector 'textarea'
+      # end
 
       question_body = Faker::Lorem.paragraph
       within '.question' do
@@ -74,5 +74,3 @@ I'd like to be able to edit my question
     end
   end
 end
-
-# save_and_open_page

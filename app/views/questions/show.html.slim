@@ -1,10 +1,10 @@
 .question
-  = render partial: "question"
+  = render @question
 
 - if @question.answers.any?
   h2 Answers:
   .answers
-    = render partial: "answer", collection: @question.answers
+    = render @question.answers.ordered
 
 br
 - if user_signed_in?
