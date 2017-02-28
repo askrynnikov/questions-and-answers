@@ -10,7 +10,7 @@ editAnswer = function() {
     });
 };
 
-// перестает работать для новых и отредактированных
+// этот вариант перестает работать для новых и отредактированных ответов
 // editAnswer = function() {
 //     return $('.edit-answer-link').click(function(e) {
 //         var answer_id;
