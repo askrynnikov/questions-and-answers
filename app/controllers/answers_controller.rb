@@ -1,5 +1,7 @@
 class AnswersController < ApplicationController
-  before_action :set_question
+  # before_action :authenticate_user!
+  before_action :set_question, only: [:new, :create]
+  before_action :set_answer, only: [:update, :destroy, :mark_best]
 
   def new
     @answer = @question.answers.new
@@ -19,7 +21,6 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    @answer = Answer.find(params[:id])
     @answer.destroy if current_user.author_of?(@answer)
 
     # if current_user.author_of?(@answer)
@@ -32,7 +33,6 @@ class AnswersController < ApplicationController
   end
 
   def update
-    @answer = Answer.find(params[:id])
     @answer.update(answers_params)
   end
 
@@ -44,5 +44,9 @@ class AnswersController < ApplicationController
 
   def set_question
     @question = Question.find(params[:question_id])
+  end
+
+  def set_answer
+    @answer = Answer.find(params[:id])
   end
 end

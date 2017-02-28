@@ -1,15 +1,21 @@
 - if answer.persisted?
-  div class="answer-#{answer.id}"
+  div class=["answer", "answer-#{answer.id}"]
+    .answer-best
+    - if answer.best?
+      b Answer best
+    - elsif user_signed_in? && current_user.author_of?(answer.question)
+      /= link_to 'Mark best', mark_best_answer_path(answer), method: :patch, remote: true
+
     p= answer.body
     //p= current_user.email
     /p= answer.user.email
     - if current_user && current_user.author_of?(answer)
       /br
       p= link_to 'Edit', '', remote: true, class: 'edit-answer-link', data: {answer_id: answer.id}
-      p= link_to 'Delete answer', question_answer_path(answer.question, answer), remote: true, class: 'delete-answer-link',
+      p= link_to 'Delete answer', answer_path(answer), remote: true, class: 'delete-answer-link',
               data: {answer_id: answer.id, confirm: 'Are you sure?'}, method: :delete
       p
-        = form_for [@question, answer], remote: true, html: {id: "edit-answer-#{answer.id}"} do |f|
+        = form_for answer, remote: true, html: {id: "edit-answer-#{answer.id}"} do |f|
           = f.label :body, "Answer"
           = f.text_area :body
           = f.submit 'Save'
