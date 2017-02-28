@@ -1,7 +1,7 @@
-var edit_answer;
+var editAnswer;
 
-edit_answer = function() {
-    return $('.edit-answer-link').click(function(e) {
+editAnswer = function() {
+    return $('body').on('click', '.edit-answer-link', function(e) {
         var answer_id;
         e.preventDefault();
         $(this).hide();
@@ -10,12 +10,24 @@ edit_answer = function() {
     });
 };
 
-$(document).ready(edit_answer);
+// перестает работать для новых и отредактированных
+// editAnswer = function() {
+//     return $('.edit-answer-link').click(function(e) {
+//         var answer_id;
+//         e.preventDefault();
+//         $(this).hide();
+//         answer_id = $(this).data('answerId');
+//         return $('form#edit-answer-' + answer_id).show();
+//     });
+// };
 
-// $(document).on('page:load', edit_answer);
-//
-// $(document).on('page:update', edit_answer);
-//
-// $(document).on("turbolinks:load", edit_answer)
+$(document).ready(editAnswer);
 
-// $(document).on('click', '.edit-answer-link', edit_answer)
+// $(document).on("turbolinks:load", editAnswer)
+
+
+// $(document).on('page:load', editAnswer);
+//
+// $(document).on('page:update', editAnswer);
+
+// $(document).on('click', '.edit-answer-link', editAnswer)
