@@ -12,36 +12,49 @@ is able to choose a best asnwer
   given(:user2) { create(:user) }
   given!(:answer2) { create(:answer, question: question, user: user2) }
 
-  # scenario 'Unauthenticated user try to choose best answer', js: true do
-  #   visit question_path(question)
-  #   expect(page).not_to have_link 'Mark best'
-  # end
-  #
-  # describe 'Authenticated user' do
-  #   scenario 'try to choose the best answer to his question', js: true do
-  #     sign_in(user)
-  #     visit question_path(question)
-  #
-  #     expect(page).to_not have_content 'Answer best'
-  #     within ".answer-#{answer.id}" do
-  #       click_on 'Mark best'
-  #       expect(page).to have_content 'Answer best'
-  #     end
-  #     within ".answer-#{answer2.id}" do
-  #       click_on 'Mark best'
-  #       expect(page).to have_content 'Answer best'
-  #     end
-  #     within ".answer-#{answer.id}" do
-  #       expect(page).to_not have_content 'Answer best'
-  #     end
-  #   end
+  scenario 'Unauthenticated user try to choose best answer', js: true do
+    visit question_path(question)
+    expect(page).not_to have_link 'Mark best'
+  end
 
-    # scenario 'try to choose the best answer to not his question', js: true do
-    #   sign_in(user2)
-    #   visit question_path(question)
-    #   expect(page).not_to have_link 'Mark best'
-    # end
-  # end
+  describe 'Authenticated user' do
+    scenario 'try to choose the best answer to his question', js: true do
+      sign_in(user)
+      visit question_path(question)
+
+      expect(page).to_not have_content 'Answer best'
+      within ".answer-#{answer.id}" do
+        click_on 'Mark best'
+        expect(page).to have_content 'Answer best'
+      end
+      within ".answer-#{answer2.id}" do
+        click_on 'Mark best'
+        expect(page).to have_content 'Answer best'
+      end
+      within ".answer-#{answer.id}" do
+        expect(page).to_not have_content 'Answer best'
+      end
+    end
+
+    scenario 'try to choose the best answer to not his question', js: true do
+      sign_in(user2)
+      visit question_path(question)
+      expect(page).not_to have_link 'Mark best'
+    end
+  end
+
+  scenario 'best answer at top of list answers', js: true do
+    sign_in(user)
+    visit question_path(question)
+    within all(".answer").last do
+      click_on 'Mark best'
+    end
+    expect(page).to have_content 'Answer best'
+    # sleep(1) )))))) победил предыдущей строкой
+    within all(".answer").first do
+      expect(page).to have_content 'Answer best'
+    end
+  end
 end
 
 # save_and_open_page

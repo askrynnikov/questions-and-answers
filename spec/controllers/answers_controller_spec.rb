@@ -1,5 +1,7 @@
 RSpec.describe AnswersController, type: :controller do
-  let!(:question) { create(:question) }
+
+  # before { @user =  create(:user) }
+  let(:question) { create(:question) }
   let(:answer) { create(:answer, question: question) }
   # let!(:create_answer) do
   #   Proc.new do |question_id = question.id, params: attributes_for(:answer)|

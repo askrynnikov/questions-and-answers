@@ -45,5 +45,4 @@ I want to be able to give an answer
 
     expect(page).to have_content "Body can't be blank"
   end
-
 end

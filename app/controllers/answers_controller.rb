@@ -3,15 +3,22 @@ class AnswersController < ApplicationController
   before_action :set_question, only: [:create]
   before_action :set_answer, only: [:update, :destroy, :mark_best]
 
-  def new
-    @answer = @question.answers.new
+
+  def mark_best
+    @answer.mark_best if current_user && current_user.author_of?(@answer.question)
   end
+
+  # def new
+  #   # @answer = @question.answers.new
+  # end
 
   def create
     # @question.answers.create(answers_params)
-    @answer = @question.answers.new(answers_params)
-    @answer.user = current_user
-    @answer.save
+    if current_user
+      @answer = @question.answers.new(answers_params)
+      @answer.user = current_user
+      @answer.save
+    end
     # if @answer.save
     #   flash[:notice] = 'Your answer successfully created.'
     # else
@@ -21,7 +28,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    @answer.destroy if current_user.author_of?(@answer)
+    @answer.destroy if current_user && current_user.author_of?(@answer)
 
     # if current_user.author_of?(@answer)
     #   @answer.destroy
@@ -33,7 +40,7 @@ class AnswersController < ApplicationController
   end
 
   def update
-    @answer.update(answers_params)
+    @answer.update(answers_params) # if current_user && current_user.author_of?(@answer)
   end
 
   private

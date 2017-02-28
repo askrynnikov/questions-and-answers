@@ -2,9 +2,9 @@
   = render @question
 
 .answers
-  - if @question.answers.any?
-    h2 Answers:
-    = render @question.answers.ordered
+  /- if @question.answers.any?
+  /  h2 Answers:
+  = render @question.answers.ordered
 
 - if user_signed_in?
   .form_add_answer
