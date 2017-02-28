@@ -4,7 +4,7 @@
     - if answer.best?
       b Answer best
     - elsif user_signed_in? && current_user.author_of?(answer.question)
-      /= link_to 'Mark best', mark_best_answer_path(answer), method: :patch, remote: true
+      = link_to 'Mark best', mark_best_answer_path(answer), method: :patch, remote: true
 
     p= answer.body
     //p= current_user.email

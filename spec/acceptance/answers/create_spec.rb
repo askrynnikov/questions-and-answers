@@ -47,5 +47,3 @@ I want to be able to give an answer
   end
 
 end
-
-# save_and_open_page

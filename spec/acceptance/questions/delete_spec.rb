@@ -32,4 +32,3 @@ RSpec.feature 'Delete question', %q{
     expect(page).not_to have_content 'Delete question'
   end
 end
-# save_and_open_page
