@@ -10,10 +10,10 @@ RSpec.feature 'Delete answer', %q{
   given(:user2) { create(:user) }
   given!(:question) { create(:question, user: user) }
   given!(:answer) { create(:answer, user: user, question: question) }
-  # given!(:answer2) { create(:answer, user: user2, question: question) }
 
   scenario 'Authenticated user delete his answer', js: true do
     sign_in(user)
+    expect(page).to have_link 'Sign out'
     visit question_path(question)
     expect(page).to have_content answer.body
     page.accept_confirm do

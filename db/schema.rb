@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227153345) do
+ActiveRecord::Schema.define(version: 20170302190356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20170227153345) do
     t.datetime "updated_at",                  null: false
     t.integer  "user_id"
     t.boolean  "best",        default: false
+    t.index ["question_id", "best"], name: "unique_index_to_avoid_duplicate_best_answers", unique: true, where: "(best = true)", using: :btree
     t.index ["question_id"], name: "index_answers_on_question_id", using: :btree
     t.index ["user_id"], name: "index_answers_on_user_id", using: :btree
   end
