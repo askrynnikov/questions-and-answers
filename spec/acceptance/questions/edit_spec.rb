@@ -8,10 +8,10 @@ I'd like to be able to edit my question
 
   given(:user) { create(:user) }
   given!(:question) { create(:question, user: user) }
-  # given!(:answer) { create(:answer, question: question, user: user) }
   given(:user2) { create(:user) }
   given!(:question2) { create(:question, user: user2) }
-  # given!(:answer2) { create(:answer, question: question, user: user2) }
+  given(:question_body) { Faker::Lorem.paragraph }
+  given(:question_body2) { Faker::Lorem.paragraph }
 
   scenario 'Unauthenticated user try to edit question' do
     visit question_path(question)
@@ -20,7 +20,7 @@ I'd like to be able to edit my question
   end
 
   describe 'Authenticated user' do
-    before() do
+    before do
       sign_in(user)
     end
 
@@ -37,12 +37,6 @@ I'd like to be able to edit my question
         expect(page).to have_selector 'textarea'
       end
 
-      # # sleep(1)
-      # within '.question' do
-      #  expect(page).to have_selector 'textarea'
-      # end
-
-      question_body = Faker::Lorem.paragraph
       within '.question' do
         fill_in 'question_body', with: question_body
         click_on 'Save'
@@ -57,13 +51,12 @@ I'd like to be able to edit my question
         expect(page).to have_selector 'textarea'
       end
 
-      question_body = Faker::Lorem.paragraph
       within '.question' do
-        fill_in 'question_body', with: question_body
+        fill_in 'question_body', with: question_body2
         click_on 'Save'
 
         expect(page).to_not have_content question.body
-        expect(page).to have_content question_body
+        expect(page).to have_content question_body2
         expect(page).to_not have_selector 'textarea'
       end
     end

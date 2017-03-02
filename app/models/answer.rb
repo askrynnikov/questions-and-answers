@@ -7,8 +7,8 @@ class Answer < ApplicationRecord
   scope :ordered, -> { order('best DESC, created_at') }
 
   def mark_best
-    ActiveRecord::Base.transaction do
-      question.answers.where(best: true).find_each { |answer| answer.update!(best: false) }
+    transaction do
+      Answer.where(question_id: question_id).update_all(best: false)
       update!(best: true)
     end
   end

@@ -49,8 +49,7 @@ is able to choose a best asnwer
     within all(".answer").last do
       click_on 'Mark best'
     end
-    expect(page).to have_content 'Answer best'
-    # sleep(1) )))))) победил предыдущей строкой
+    expect(page).to have_content 'Answer best', count: 1
     within all(".answer").first do
       expect(page).to have_content 'Answer best'
     end
