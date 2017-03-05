@@ -4,12 +4,15 @@ RSpec.describe Question, type: :model do
     it do
       should have_many(:answers)
                .dependent(:destroy)
+      should have_many(:attachments)
     end
   end
 
   describe 'validations' do
     it { should validate_presence_of(:title) }
     it { should validate_presence_of(:body) }
+    it { should accept_nested_attributes_for :attachments }
+
   end
 
 
