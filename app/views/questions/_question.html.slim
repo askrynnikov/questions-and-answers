@@ -1,5 +1,12 @@
 h1 = @question.title
 p = @question.body
+- if @question.attachments.any?
+  p Attachments:
+  ul
+    - @question.attachments.each do |a|
+      /li= a.file.filename
+      li= link_to a.file.identifier, a.file.url
+
 - if current_user && current_user.author_of?(@question)
   /br
   p= link_to 'Edit question', '', class: 'edit-question-link', data: {question_id: @question.id}, remote: true

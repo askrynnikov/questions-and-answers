@@ -21,3 +21,5 @@ config/secrets.yml
 .idea
 
 spec/examples.txt
+
+/public/uploads
