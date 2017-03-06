@@ -1,0 +1,9 @@
+<% if @attachment.errors.present? %>
+  <% @attachment.errors.full_messages.each do |message| %>
+    $('.attachment-<%= @attachment.id %> .attachment-errors').html('<%= j message %>');
+  <% end %>
+<% else %>
+  <% if @attachment.destroyed? %>
+    $('li.attachment-<%= @attachment.id %>').remove();
+  <% end %>
+<% end %>
