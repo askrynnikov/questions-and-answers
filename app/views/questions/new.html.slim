@@ -5,10 +5,10 @@
   p
     = f.label :body
     = f.text_field :body
-  p Attachments:
-  p
-    = f.fields_for :attachments do |a|
-      = a.label :file
-      = a.file_field :file
-
+  /p Attachments:
+  /p
+  /  = f.fields_for :attachments do |a|
+  /    = a.label :file
+  /    = a.file_field :file
+  = render 'attachments/form', f: f
   p= f.submit 'Create'

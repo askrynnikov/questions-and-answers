@@ -38,12 +38,11 @@ gem 'jbuilder', '~> 2.5'
 #gem 'sdoc', group: :doc
 
 gem 'slim-rails'
-
 gem 'devise'
-
 gem 'carrierwave'
+gem 'remotipart'
 
-gem 'remotipart', '~> 1.3'
+gem 'cocoon'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
