@@ -8,19 +8,24 @@ RSpec.feature 'Add files to question', %q{
 
   given(:user) { create(:user) }
 
-  background do
-    sign_in(user)
-    visit new_question_path
-  end
+  # background do
+  #   sign_in(user)
+  #   visit new_question_path
+  # end
 
   scenario 'User adds file when asks question' do
+    sign_in(user)
+    visit new_question_path
+
+
     fill_in 'Title', with: 'Test question'
     fill_in 'Body', with: 'text text'
     attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
     click_on 'Create'
-    save_and_open_page
-    expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec/spec_helper.rb'
+    # save_and_open_page
+    expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
   end
+
 
   scenario 'Non-authenticated user creates question' do
     visit questions_path

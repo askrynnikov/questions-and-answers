@@ -22,4 +22,8 @@ config/secrets.yml
 
 spec/examples.txt
 
+# Ignore uploaded files
+/public/system
+/public/tmp
 /public/uploads
+/public/spec
