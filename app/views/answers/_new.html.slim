@@ -2,7 +2,4 @@
   .answer-errors
   p= f.submit 'Your Answer'
   p= f.text_area :body
-  p
-    = f.fields_for :attachments do |a|
-      = a.label :file
-      = a.file_field :file
+  = render 'attachments/form', f: f
