@@ -90,6 +90,9 @@ GEM
       i18n (~> 0.5)
     ffi (1.9.17)
     ffi (1.9.17-java)
+    fuubar (2.2.0)
+      rspec-core (~> 3.0)
+      ruby-progressbar (~> 1.4)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     i18n (0.8.0)
@@ -273,6 +276,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   faker
+  fuubar
   jbuilder (~> 2.5)
   jquery-rails
   launchy

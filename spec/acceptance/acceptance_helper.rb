@@ -3,6 +3,7 @@ require 'spec_helper'
 require 'databasecleaner_helper'
 
 Capybara.default_max_wait_time = 10
+# Capybara.automatic_reload = true
 
 RSpec.configure do |config|
   # Capybara.javascript_driver = :webkit

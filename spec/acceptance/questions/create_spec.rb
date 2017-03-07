@@ -8,7 +8,7 @@ RSpec.feature 'Create question', %q{
 
   given(:user) {create(:user)}
 
-  scenario 'Authenticated user creates question' do
+  scenario 'Authenticated user creates question', js: true  do
     sign_in(user)
 
     visit questions_path
@@ -20,7 +20,7 @@ RSpec.feature 'Create question', %q{
     expect(page).to have_content 'Your question successfully created.'
   end
 
-  scenario 'Non-authenticated user creates question' do
+  scenario 'Non-authenticated user creates question', js: true  do
     visit questions_path
     click_on 'Ask question'
     expect(page).to have_content 'You need to sign in or sign up before continuing.'
