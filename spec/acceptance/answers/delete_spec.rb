@@ -22,13 +22,13 @@ RSpec.feature 'Delete answer', %q{
     expect(page).to_not have_content answer.body
   end
 
-  scenario 'Authenticated user trying to delete not his answer' do
+  scenario 'Authenticated user trying to delete not his answer', js: true  do
     sign_in(user2)
     visit question_path(question)
     expect(page).to_not have_link('Delete answer')
   end
 
-  scenario 'Non-authenticated user tries delete answer' do
+  scenario 'Non-authenticated user tries delete answer', js: true  do
     visit question_path(question)
     expect(page).to_not have_link('Delete answer')
   end

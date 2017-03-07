@@ -29,7 +29,7 @@ I want to be able to give an answer
     end
   end
 
-  scenario 'Non-authenticated user creates answer' do
+  scenario 'Non-authenticated user creates answer', js: true do
     visit question_path(question)
     expect(page).not_to have_selector '#answer_body'
   end

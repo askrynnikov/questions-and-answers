@@ -18,8 +18,6 @@ RSpec.feature 'Add files to answer', %q{
     fill_in 'answer_body', with: 'text text'
     attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
     click_on 'Your Answer'
-    # опять нужна задержка
-    expect(page).to have_content 'File'
     within '.answers' do
       expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
     end
