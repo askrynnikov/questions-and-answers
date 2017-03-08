@@ -6,6 +6,7 @@ RSpec.feature 'Delete files of answer', %q{
    I want to be able to delete attached file
  } do
   given(:user) { create(:user) }
+  given(:user2) { create(:user) }
   given(:question) { create(:question) }
   given(:answer) { create(:answer, user: user, question: question) }
   given!(:attachment) { create(:attachment, attachable: answer) }
@@ -16,12 +17,9 @@ RSpec.feature 'Delete files of answer', %q{
   end
 
   describe 'Authenticated user' do
-    before do
-      sign_in(user)
-    end
-
     context 'Author' do
       scenario 'try delete attached file', js: true do
+        sign_in(user)
         visit question_path(question)
         expect(page).to have_link @expected_file_name, href: @expected_href
         page.accept_confirm do
@@ -33,11 +31,9 @@ RSpec.feature 'Delete files of answer', %q{
 
     context 'not author' do
       scenario 'try delete attached file', js: true do
-        another_question = create(:question)
-        another_answer = create(:answer, question: another_question)
-        create(:attachment, attachable: another_answer)
-        visit question_path(another_question)
-        expect(page).to have_link @expected_file_name, href: '/uploads/attachment/file/2/spec_helper.rb'
+        sign_in(user2)
+        visit question_path(question)
+        expect(page).to have_link @expected_file_name, href: @expected_href
         expect(page).to_not have_link 'Delete file'
       end
     end

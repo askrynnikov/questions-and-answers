@@ -9,16 +9,18 @@ RSpec.feature 'Delete question', %q{
   given(:user) { create(:user) }
   given(:question) { create(:question, user: user) }
 
-  scenario 'Authenticated user delete his question' do
+  scenario 'Authenticated user delete his question', js: true do
     sign_in(user)
     visit questions_path(question)
-    click_on 'Delete question'
+    page.accept_confirm do
+      click_on 'Delete question'
+    end
 
     expect(page).to have_content 'Your question successfully deleted.'
     expect(page).not_to have_content question.title
   end
 
-  scenario 'Authenticated user trying to delete not his question' do
+  scenario 'Authenticated user trying to delete not his question', js: true  do
     user2 = create(:user)
     sign_in(user2)
     visit question_path(question)
@@ -26,7 +28,7 @@ RSpec.feature 'Delete question', %q{
     expect(page).not_to have_content 'Delete question'
   end
 
-  scenario 'Non-authenticated user tries delete question' do
+  scenario 'Non-authenticated user tries delete question', js: true do
     visit question_path(question)
 
     expect(page).not_to have_content 'Delete question'
