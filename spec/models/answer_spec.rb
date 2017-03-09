@@ -2,9 +2,11 @@ RSpec.describe Answer, type: :model do
   describe 'associations' do
     it do
       should belong_to(:question)
-      should have_many(:attachments)
+      should have_many(:attachments) #.dependent(:destroy)
     end
   end
+
+  it_behaves_like "has_user"
 
   describe 'validations' do
     it { should validate_presence_of(:body) }
