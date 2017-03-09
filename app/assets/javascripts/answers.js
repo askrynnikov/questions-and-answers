@@ -1,3 +1,15 @@
+$(function() {
+    return $('form.new_answer').bind('ajax:success', function(e, data, status, xhr) {
+        var answer;
+        answer = $.parseJSON(xhr.responseText);
+        return $('.answers').append('<p>'+answer.body+'</p>');
+    }).bind('ajax:error', function(e, xhr, status, error) {
+        errors = $.parseJSON(xhr.responseText);
+        return $('.answer-errors').append(value);
+    });
+});
+
+
 var editAnswer;
 
 editAnswer = function() {
@@ -10,18 +22,9 @@ editAnswer = function() {
     });
 };
 
-// этот вариант перестает работать для новых и отредактированных ответов
-// editAnswer = function() {
-//     return $('.edit-answer-link').click(function(e) {
-//         var answer_id;
-//         e.preventDefault();
-//         $(this).hide();
-//         answer_id = $(this).data('answerId');
-//         return $('form#edit-answer-' + answer_id).show();
-//     });
-// };
-
 $(document).ready(editAnswer);
+
+
 
 // $(document).on("turbolinks:load", editAnswer)
 
