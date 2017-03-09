@@ -1,4 +1,5 @@
-= form_for [@question, @answer], remote: true, format: :json, data: { type: :json } do |f|
+/= form_for [@question, @answer], remote: true, format: :json, data: { type: :json } do |f|
+= form_for [@question, @answer], remote: true do |f|
   .answer-errors
   p= f.submit 'Your Answer'
   p= f.text_area :body
