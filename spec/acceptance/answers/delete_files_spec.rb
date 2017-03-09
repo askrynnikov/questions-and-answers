@@ -39,9 +39,11 @@ RSpec.feature 'Delete files of answer', %q{
     end
   end
 
-  scenario 'Non-authenticated user try delete file', js: true do
-    visit question_path(question)
-    expect(page).to have_link @expected_file_name, href: @expected_href
-    expect(page).to_not have_link 'Delete file'
+  describe 'Non-authenticated user' do
+    scenario 'try delete attached file', js: true do
+      visit question_path(question)
+      expect(page).to have_link @expected_file_name, href: @expected_href
+      expect(page).to_not have_link 'Delete file'
+    end
   end
 end
