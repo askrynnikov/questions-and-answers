@@ -10,7 +10,11 @@ Rails.application.configure do
   # Do not eager load code on boot. This avoids loading your whole application
   # just for the purpose of running a single test. If you are using a tool that
   # preloads Rails for running tests, you may have to set it to true.
-  config.eager_load = false
+   config.eager_load = false
+
+  # https://bibwild.wordpress.com/2016/02/18/struggling-towards-reliable-capybara-javascript-testing/
+  # config.allow_concurrency = false
+  # config.eager_load = true
 
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true

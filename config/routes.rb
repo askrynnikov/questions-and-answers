@@ -10,7 +10,5 @@ Rails.application.routes.draw do
     end
   end
 
-  # resources :answers, only: [:update, :destroy] do
-  #   patch 'mark_best', on: :member
-  # end
+  resources :attachments, only: [:destroy]
 end

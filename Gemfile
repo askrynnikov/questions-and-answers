@@ -38,8 +38,11 @@ gem 'jbuilder', '~> 2.5'
 #gem 'sdoc', group: :doc
 
 gem 'slim-rails'
-
 gem 'devise'
+gem 'carrierwave'
+gem 'remotipart'
+
+gem 'cocoon'
 
 gem 'carrierwave'
 
@@ -85,4 +88,5 @@ group :test do
   gem 'rails-controller-testing'
   gem 'capybara'
   gem 'launchy'
+  gem 'fuubar'
 end

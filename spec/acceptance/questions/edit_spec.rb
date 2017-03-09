@@ -13,7 +13,7 @@ I'd like to be able to edit my question
   given(:question_body) { Faker::Lorem.paragraph }
   given(:question_body2) { Faker::Lorem.paragraph }
 
-  scenario 'Unauthenticated user try to edit question' do
+  scenario 'Unauthenticated user try to edit question', js: true do
     visit question_path(question)
 
     expect(page).not_to have_link 'Edit question'

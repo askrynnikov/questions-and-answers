@@ -60,6 +60,7 @@ GEM
       mime-types (>= 1.16)
     childprocess (0.6.1)
       ffi (~> 1.0, >= 1.0.11)
+    cocoon (1.2.9)
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.2.x)
@@ -89,6 +90,9 @@ GEM
       i18n (~> 0.5)
     ffi (1.9.17)
     ffi (1.9.17-java)
+    fuubar (2.2.0)
+      rspec-core (~> 3.0)
+      ruby-progressbar (~> 1.4)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     i18n (0.8.0)
@@ -266,11 +270,13 @@ DEPENDENCIES
   byebug
   capybara
   carrierwave
+  cocoon
   coffee-rails (~> 4.2)
   database_cleaner
   devise
   factory_girl_rails
   faker
+  fuubar
   jbuilder (~> 2.5)
   jquery-rails
   launchy
@@ -279,7 +285,7 @@ DEPENDENCIES
   puma (~> 3.0)
   rails (~> 5.0.1)
   rails-controller-testing
-  remotipart (~> 1.3)
+  remotipart
   rspec-rails
   rubocop
   sass-rails (~> 5.0)

@@ -1,0 +1,6 @@
+.nested-fields
+  .attachment-errors
+  .field
+    = f.label :file
+    = f.file_field :file
+  = link_to_remove_association "Remove file", f
