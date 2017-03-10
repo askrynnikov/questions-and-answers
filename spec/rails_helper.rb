@@ -43,8 +43,7 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   # config.include Devise::Test::IntegrationHelpers # Devise::MissingWarden:
-  config.include Devise::TestHelpers, type: :controller # устаревает (но сейчас работает)
-  # config.include Devise::Test::ControllerHelpers # Failure/Error: @request.env['action_controller.instance'] = @controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
 
   config.extend ControllerMacros, type: :controller
   # config.include ActionController, type: :feature
