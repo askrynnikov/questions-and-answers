@@ -7,6 +7,7 @@
       = link_to 'Mark best', mark_best_answer_path(answer), method: :patch, remote: true
 
     p= answer.body
+    = render 'votes/vote', entity: answer
     - if current_user && current_user.author_of?(answer)
       = render 'answers/edit', answer: answer
     = render 'attachments/attachments', entity: answer
