@@ -42,13 +42,14 @@ class VotesController < ApplicationController
   end
 
   def set_votable!
-    votable_id = params["#{params[:votable_type].underscore}_id"]
-    @votable = params[:votable_type].constantize.find(votable_id)
+    votable_type = request.fullpath.split('/').second.singularize
+    votable_id = params["#{votable_type}_id"]
+    @votable = votable_type.classify.constantize.find(votable_id)
   rescue NoMethodError, NameError
     render_error(:bad_request, 'Error', 'Not the correct vote data!')
   end
 
   def vote_params
-    {rating: params[:rating] == 'up' ? :up : :down }
+    {rating: params[:rating] == 'up' ? :up : :down}
   end
 end
