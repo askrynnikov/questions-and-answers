@@ -70,8 +70,8 @@ group :test, :development do
   gem 'faker'
   gem 'database_cleaner'
   gem 'capybara-webkit'
-  # gem 'selenium-webdriver'
-  # gem 'poltergeist'
+  gem 'selenium-webdriver'
+  gem 'poltergeist'
 end
 
 # более старшая версия 0.19.2-0.19.4 вызывает предупреждение https://github.com/erikhuda/thor/issues/538

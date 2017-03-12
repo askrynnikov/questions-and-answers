@@ -1,3 +1,5 @@
+require 'acceptance/acceptance_helper'
+
 RSpec.feature 'Vote answer', %q{
    In order to be able to vote "yes"/"against" answer
    As an authenticated user
