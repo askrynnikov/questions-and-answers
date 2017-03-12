@@ -17,7 +17,7 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
+gem 'coffee-rails', '~> 4.2.1'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -44,11 +44,6 @@ gem 'remotipart'
 
 gem 'cocoon'
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
-end
-
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
@@ -63,6 +58,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :test, :development do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platform: :mri
+
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'rubocop', require: false
@@ -72,6 +70,13 @@ group :test, :development do
   gem 'capybara-webkit'
   gem 'selenium-webdriver'
   gem 'poltergeist'
+
+  # For debugging
+  gem 'pry-rails'
+  gem 'pry-byebug'
+
+  # устарел
+  # gem 'quiet_assets'
 end
 
 # более старшая версия 0.19.2-0.19.4 вызывает предупреждение https://github.com/erikhuda/thor/issues/538
