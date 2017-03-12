@@ -1,4 +1,4 @@
-div class="vote-#{entity.class.name.underscore}-#{entity.id}"
+div class="vote vote-#{entity.class.name.underscore}-#{entity.id}"
   | Rating:
   span class="rating" = entity.rating
   - if user_can_vote_for?(entity)

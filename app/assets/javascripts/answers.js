@@ -1,13 +1,13 @@
-$(function() {
-    return $('form.new_answer').bind('ajax:success', function(e, data, status, xhr) {
-        var answer;
-        answer = $.parseJSON(xhr.responseText);
-        return $('.answers').append('<p>'+answer.body+'</p>');
-    }).bind('ajax:error', function(e, xhr, status, error) {
-        errors = $.parseJSON(xhr.responseText);
-        return $('.answer-errors').append(value);
-    });
-});
+// $(function() {
+//     return $('form.new_answer').bind('ajax:success', function(e, data, status, xhr) {
+//         var answer;
+//         answer = $.parseJSON(xhr.responseText);
+//         return $('.answers').append('<p>'+answer.body+'</p>');
+//     }).bind('ajax:error', function(e, xhr, status, error) {
+//         errors = $.parseJSON(xhr.responseText);
+//         return $('.answer-errors').append(value);
+//     });
+// });
 
 
 var editAnswer;
