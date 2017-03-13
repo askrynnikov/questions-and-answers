@@ -6,7 +6,6 @@ RSpec.describe Vote, type: :model do
   end
 
   describe 'validation' do
-    it { should validate_presence_of(:rating) }
     it { should validate_inclusion_of(:rating).in_array([1, -1]) }
   end
 end

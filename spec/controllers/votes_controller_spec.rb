@@ -40,13 +40,11 @@ RSpec.describe VotesController, type: :controller do
 
         context 'save vote with a negative evaluation' do
           it 'rating missing' do
-            expect { post :create, params: rating_missing }.to change(question.votes, :count).by(1)
-            expect(question.rating).to eq(-1)
+            expect { post :create, params: rating_missing }.to change(question.votes, :count).by(0)
           end
 
           it 'invalid rating' do
-            expect { post :create, params: invalid_rating }.to change(question.votes, :count).by(1)
-            expect(question.rating).to eq(-1)
+            expect { post :create, params: invalid_rating }.to change(question.votes, :count).by(0)
           end
         end
       end
