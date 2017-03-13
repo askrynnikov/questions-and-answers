@@ -3,8 +3,10 @@ class VotesController < ApplicationController
   before_action :set_votable!, only: [:create]
 
   def create
-    if !current_user.author_of?(@votable) && @votable.vote_user(current_user).nil?
-      @vote = @votable.send("vote_#{vote_params[:rating]}", current_user)
+    if !current_user.author_of?(@votable) &&
+      @votable.vote_user(current_user).nil? &&
+      %w(up down).include?(params[:rating])
+      @vote = @votable.send("vote_#{params[:rating]}", current_user)
       if @vote.persisted?
         render_success(@vote, 'create', 'Your vote has been accepted!')
       else
@@ -29,16 +31,16 @@ class VotesController < ApplicationController
 
   def render_success(item, action, message)
     render json: item.slice(:id, :votable_id)
-                     .merge(
-                         votable_type: item.votable_type.underscore,
-                         votable_rating: item.votable.rating,
-                         action: action,
-                         message: message
-                     )
+                   .merge(
+                     votable_type: item.votable_type.underscore,
+                     votable_rating: item.votable.rating,
+                     action: action,
+                     message: message
+                   )
   end
 
-  def render_error(status, error = 'error', message = 'message')
-    render json: {error: error, error_message: message}, status: status
+  def render_error(status, error, message)
+    render json: { error: error, error_message: message }, status: status
   end
 
   def set_votable!
@@ -49,7 +51,7 @@ class VotesController < ApplicationController
     render_error(:bad_request, 'Error', 'Not the correct vote data!')
   end
 
-  def vote_params
-    {rating: params[:rating] == 'up' ? :up : :down}
-  end
+  # def vote_params
+  #   { rating: params[:rating] }
+  # end
 end

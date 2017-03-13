@@ -45,10 +45,10 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # for debugging
-  config.log_level = :debug
-  logger           = ActiveSupport::Logger.new(STDOUT)
-  # logger.formatter = config.log_formatter
-  config.logger = ActiveSupport::TaggedLogging.new(logger)
-  # удобство чтения логов
-  config.assets.quiet = true
+  # config.log_level = :debug
+  # logger           = ActiveSupport::Logger.new(STDOUT)
+  # # logger.formatter = config.log_formatter
+  # config.logger = ActiveSupport::TaggedLogging.new(logger)
+  # # удобство чтения логов
+  # config.assets.quiet = true
 end
