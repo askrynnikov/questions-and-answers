@@ -100,6 +100,11 @@ GEM
       ruby-progressbar (~> 1.4)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    gon (6.1.0)
+      actionpack (>= 3.0)
+      json
+      multi_json
+      request_store (>= 1.0)
     i18n (0.8.1)
     jbuilder (2.6.3)
       activesupport (>= 3.0.0, < 5.2)
@@ -196,6 +201,7 @@ GEM
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
     remotipart (1.3.1)
+    request_store (1.3.2)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
     rspec-core (3.5.4)
@@ -236,6 +242,11 @@ GEM
       websocket (~> 1.0)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
+    skim (0.10.0)
+      coffee-script
+      coffee-script-source (>= 1.2.0)
+      slim (>= 3.0)
+      sprockets (>= 2, < 4)
     slim (3.0.7)
       temple (~> 0.7.6)
       tilt (>= 1.3.3, < 2.1)
@@ -304,6 +315,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   fuubar
+  gon
   jbuilder (~> 2.5)
   jquery-rails
   launchy
@@ -321,6 +333,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   selenium-webdriver
   shoulda-matchers
+  skim
   slim-rails
   spring
   spring-watcher-listen (~> 2.0.0)
