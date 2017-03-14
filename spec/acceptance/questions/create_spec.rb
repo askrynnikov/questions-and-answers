@@ -9,7 +9,7 @@ RSpec.feature 'Create question', %q{
   given(:user) {create(:user)}
 
   context 'as user' do
-    backgroung do
+    before do
       sign_in(user)
       visit questions_path
     end
