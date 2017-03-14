@@ -13,8 +13,6 @@ It has the ability to view issues
     visit questions_path
 
     expect(page).to have_content questions[0].title
-    expect(page).to have_content questions[0].body
     expect(page).to have_content questions[1].title
-    expect(page).to have_content questions[1].body
   end
 end
