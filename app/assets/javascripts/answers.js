@@ -24,6 +24,17 @@ editAnswer = function() {
 
 $(document).ready(editAnswer);
 
+// $(function () {
+//   return App.cable.subscriptions.create('AnswersChannel', {
+//     connected: function () {
+//       console.log('Connected!');
+//       return this.perform('follow');
+//     },
+//     received: function (data) {
+//       return $('.answers').append(data);
+//     }
+//   });
+// });
 
 
 // $(document).on("turbolinks:load", editAnswer)

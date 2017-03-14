@@ -51,4 +51,8 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(logger)
   # # удобство чтения логов
   # config.assets.quiet = true
+
+  # for test ActionCable
+  config.action_cable.disable_request_forgery_protection = true
+
 end

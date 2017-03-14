@@ -1,14 +1,14 @@
-h1 = @question.title
-= render 'votes/vote', entity: @question
-p = @question.body
-= render 'attachments/attachments', entity: @question
+h1 = question.title
+= render 'votes/vote', entity: question
+p = question.body
+= render 'attachments/attachments', entity: question
 
-- if current_user && current_user.author_of?(@question)
+- if current_user && current_user.author_of?(question)
   /br
-  p= link_to 'Edit question', '', class: 'edit-question-link', data: {question_id: @question.id}, remote: true
-  p= link_to 'Delete question', question_path(@question), data: {confirm: 'Are you sure?'}, method: :delete
+  p= link_to 'Edit question', '', class: 'edit-question-link', data: {question_id: question.id}, remote: true
+  p= link_to 'Delete question', question_path(question), data: {confirm: 'Are you sure?'}, method: :delete
   p
-    = form_for @question, remote: true, html: {id: "edit-question-#{@question.id}"} do |f|
+    = form_for question, remote: true, html: {id: "edit-question-#{question.id}"} do |f|
       = f.label :title, "Title"
       = f.text_area :title
       = f.label :body, "Question"

@@ -13,6 +13,10 @@ Capybara.save_path = "./tmp/capybara_output"
 Capybara.server_host = "0.0.0.0"
 Capybara.server_port = 3100
 
+# для корректной работы accaptance-тестов ActionCable
+Capybara.server = :puma
+
+
 # Capybara.register_driver :poltergeist do |app|
 #   # Set to log all javascript console messages to file
 #   Capybara::Poltergeist::Driver.new(app)

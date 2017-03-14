@@ -13,15 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.remotipart
+//= require action_cable
 //= require cocoon
 //= require_tree .
 
-// jQuery.ajaxSetup({
-//     beforeSend: function(xhr) {
-//         $('#spinner').show();
-//     },
-//     // runs after AJAX requests complete, successfully or not
-//     complete: function(xhr, status){
-//         $('#spinner').hide();
-//     }
-// });
+var App = App || {};
+App.cable = ActionCable.createConsumer();
