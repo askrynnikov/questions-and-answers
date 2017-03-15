@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_commentable!, only: [:create]
+  after_action :publish_comment, only: [:create]
 
   def create
     @comment = @commentable.comments.new(comment_params)
@@ -32,8 +33,16 @@ class CommentsController < ApplicationController
   end
 
   def set_commentable!
-    commentable_type = request.fullpath.split('/').second.singularize
-    commentable_id = params["#{commentable_type}_id"]
-    @commentable = commentable_type.classify.constantize.find(commentable_id)
+    @commentable_type = request.fullpath.split('/').second.singularize
+    @commentable_id = params["#{@commentable_type}_id"]
+    @commentable = @commentable_type.classify.constantize.find(@commentable_id)
+  end
+
+  def publish_comment
+    return if @comment.errors.any?
+    ActionCable.server.broadcast(
+      "#{@commentable_type}_#{@commentable.id}_comments",
+      comment: @comment
+    )
   end
 end
