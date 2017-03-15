@@ -15,5 +15,5 @@ p = question.body
       = f.submit 'Save'
   p= link_to 'Delete question', question_path(question), data: { confirm: 'Are you sure?' }, method: :delete
 
-div *{ 'data-question-id' =>@question.id } class="comments comments-question-#{@question.id}"
+div *{ 'data-commentable-id' => @question.id, 'data-commentable-type' => @question.class.name.underscore } class="comments comments-question-#{@question.id}"
   = render 'comments/show', commentable: @question
