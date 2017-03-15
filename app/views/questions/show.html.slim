@@ -1,7 +1,7 @@
 .question
   = render @question
 
-.answers *{'data-question-id'=>@question.id}
+.answers *{ 'data-question-id' =>@question.id }
   /- if @question.answers.any?
   /  h2 Answers:
   = render @question.answers.ordered

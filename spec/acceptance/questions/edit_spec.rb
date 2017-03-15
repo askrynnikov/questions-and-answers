@@ -22,6 +22,7 @@ I'd like to be able to edit my question
   describe 'Authenticated user' do
     before do
       sign_in(user)
+      # expect(page).to have_link 'Sign out'
     end
 
     scenario 'sees link to Edit question', js: true do
@@ -29,35 +30,24 @@ I'd like to be able to edit my question
       expect(page).to have_link 'Edit question'
     end
 
-    scenario 'try to edit his answer', js: true do
+    scenario 'try to edit his question', js: true do
       visit question_path(question)
       within '.question' do
-        expect(page).to_not have_selector 'textarea'
         click_on 'Edit question'
-        expect(page).to have_selector 'textarea'
-      end
 
-      within '.question' do
         fill_in 'question_body', with: question_body
         click_on 'Save'
 
         expect(page).to_not have_content question.body
         expect(page).to have_content question_body
-        expect(page).to_not have_selector 'textarea'
-      end
 
-      click_on 'Edit question'
-      within '.question' do
-        expect(page).to have_selector 'textarea'
-      end
+        click_on 'Edit question'
 
-      within '.question' do
         fill_in 'question_body', with: question_body2
         click_on 'Save'
 
         expect(page).to_not have_content question.body
         expect(page).to have_content question_body2
-        expect(page).to_not have_selector 'textarea'
       end
     end
 

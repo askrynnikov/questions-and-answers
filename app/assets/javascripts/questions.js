@@ -1,7 +1,7 @@
-var edit_question;
+var editQuestion;
 
-edit_question = function () {
-  return $('.edit-question-link').click(function (e) {
+editQuestion = function () {
+  return $('body').on('click', '.edit-question-link', function(e) {
     var question_id;
     e.preventDefault();
     $(this).hide();
@@ -10,7 +10,7 @@ edit_question = function () {
   });
 };
 
-$(document).ready(edit_question);
+$(document).ready(editQuestion);
 
 // $(function () {
 //   return App.cable.subscriptions.create('QuestionsChannel', {
