@@ -37,11 +37,11 @@ I'd like to be able to edit my answer
     end
 
     scenario 'try to edit his answer', js: true do
-      within '.answers' do
+      within '.answers .edit' do
         expect(page).to_not have_selector 'textarea'
       end
       click_on 'Edit'
-      within '.answers' do
+      within '.answers .edit' do
        expect(page).to have_selector 'textarea'
       end
 
@@ -51,11 +51,13 @@ I'd like to be able to edit my answer
 
         expect(page).to_not have_content answer.body
         expect(page).to have_content answer_body
+      end
+      within '.answers .edit' do
         expect(page).to_not have_selector 'textarea'
       end
 
       click_on 'Edit'
-      within '.answers' do
+      within '.answers .edit' do
         expect(page).to have_selector 'textarea'
       end
 
@@ -65,6 +67,9 @@ I'd like to be able to edit my answer
 
         expect(page).to_not have_content answer.body
         expect(page).to have_content answer_body2
+      end
+
+      within '.answers .edit' do
         expect(page).to_not have_selector 'textarea'
       end
 
