@@ -4,14 +4,16 @@ p = question.body
 = render 'attachments/attachments', entity: question
 
 - if current_user && current_user.author_of?(question)
-  /br
-  p= link_to 'Edit question', '', class: 'edit-question-link', data: {question_id: question.id}, remote: true
-  p= link_to 'Delete question', question_path(question), data: {confirm: 'Are you sure?'}, method: :delete
-  p
-    = form_for question, remote: true, html: {id: "edit-question-#{question.id}"} do |f|
+  .edit
+    p = link_to 'Edit question', '', class: 'edit-question-link', data: { question_id: question.id }, remote: true
+    p = form_for question, remote: true, html: { id: "edit-question-#{question.id}" } do |f|
       = f.label :title, "Title"
       = f.text_area :title
       = f.label :body, "Question"
       = f.text_area :body
       /= render 'attachments/attachments', entity: f
       = f.submit 'Save'
+  p= link_to 'Delete question', question_path(question), data: { confirm: 'Are you sure?' }, method: :delete
+
+div *{ 'data-question-id' =>@question.id } class="comments comments-question-#{@question.id}"
+  = render 'comments/show', commentable: @question
