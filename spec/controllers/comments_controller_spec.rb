@@ -25,8 +25,16 @@ RSpec.describe CommentsController, type: :controller do
 
           expect(response).to have_http_status :success
 
-          schema = '{ "type": "object", "required": ["id", "id2", "content", "commentable_type", "commentable_id", "message"] }'
+          schema = '{ "type": "object", "required": ["id", "content", "commentable_type", "commentable_id", "message"] }'
           expect(data).to match_response_schema(schema)
+
+          response_data = %({"id": #{ comment.id },
+                     "content": "#{ comment.content }",
+                     "commentable_type": "#{ question.class.name.underscore }",
+                     "commentable_id": #{ question.id },
+                     "message": "Your comment has been added!",
+                     "action": "create"})
+          expect(response.body).to be_json_eql(response_data)
 
           # expect(data['id']).to eq assigns(:comment).id
           # expect(data['content']).to eq comment.content
