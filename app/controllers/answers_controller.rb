@@ -41,9 +41,15 @@ class AnswersController < ApplicationController
     return if @answer.errors.any?
     ActionCable.server.broadcast(
       "question_#{@question.id}_answers",
-      answer: @answer,
-      question_author: @answer.question.user.id,
-      attachments: @answer.attachments.map { |a| { id: a.id, file_name: a.file.identifier, file_url: a.file.url } }
+      @answer.as_json(root: true,
+                      include: {
+                        attachments: {
+                          only: :id,
+                          methods: ['file_identifier', 'file_url']
+                        },
+                        question: {
+                          only: :user_id }
+                      })
     )
   end
 end
