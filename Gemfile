@@ -48,9 +48,10 @@ gem 'cocoon'
 gem 'skim'
 gem 'gon'
 
-
 # 3.7   DEPRECATION WARNING: Sprockets method `register_engine` is deprecated.
 gem 'sprockets', '3.6.3'
+
+gem 'json-schema'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.

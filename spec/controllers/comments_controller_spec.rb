@@ -24,11 +24,15 @@ RSpec.describe CommentsController, type: :controller do
           data = JSON.parse(response.body)
 
           expect(response).to have_http_status :success
-          expect(data['id']).to eq assigns(:comment).id
-          expect(data['content']).to eq comment.content
-          expect(data['commentable_type']).to eq question.class.name.underscore
-          expect(data['commentable_id']).to eq question.id
-          expect(data['message']).to eq 'Your comment has been added!'
+
+          schema = '{ "type": "object", "required": ["id", "id2", "content", "commentable_type", "commentable_id", "message"] }'
+          expect(data).to match_response_schema(schema)
+
+          # expect(data['id']).to eq assigns(:comment).id
+          # expect(data['content']).to eq comment.content
+          # expect(data['commentable_type']).to eq question.class.name.underscore
+          # expect(data['commentable_id']).to eq question.id
+          # expect(data['message']).to eq 'Your comment has been added!'
         end
       end
 
