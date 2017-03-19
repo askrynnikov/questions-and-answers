@@ -39,17 +39,7 @@ class AnswersController < ApplicationController
 
   def publish_answer
     return if @answer.errors.any?
-    ActionCable.server.broadcast(
-      "question_#{@question.id}_answers",
-      @answer.as_json(root: true,
-                      include: {
-                        attachments: {
-                          only: :id,
-                          methods: ['file_identifier', 'file_url']
-                        },
-                        question: {
-                          only: :user_id }
-                      })
-    )
+    answer = AnswerPresenter.new(@answer).as(:broadcast)
+    ActionCable.server.broadcast("question_#{@question.id}_answers", answer)
   end
 end

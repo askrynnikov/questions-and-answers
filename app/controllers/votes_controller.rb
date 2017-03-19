@@ -8,7 +8,7 @@ class VotesController < ApplicationController
       %w(up down).include?(params[:rating])
       @vote = @votable.send("vote_#{params[:rating]}", current_user)
       if @vote.persisted?
-        render_success(@vote, 'create', 'Your vote has been accepted!')
+        render json: VotePresenter.new(@vote).as(:success_create)
       else
         render_error(:unprocessable_entity, 'Error save', 'Not the correct vote data!')
       end
@@ -21,27 +21,13 @@ class VotesController < ApplicationController
     vote = Vote.find(params[:id])
     if current_user.author_of?(vote)
       vote.destroy
-      render_success(vote, 'delete', 'Your vote removed!')
+      render json: VotePresenter.new(vote).as(:success_destroy)
     else
       render_error(:forbidden, 'Error remove', 'You can not remove an vote!')
     end
   end
 
   private
-
-  def render_success(item, action, message)
-    render json: item.slice(:id, :votable_id)
-                   .merge(
-                     votable_type: item.votable_type.underscore,
-                     votable_rating: item.votable.rating,
-                     action: action,
-                     message: message
-                   )
-  end
-
-  def render_error(status, error, message)
-    render json: { error: error, error_message: message }, status: status
-  end
 
   def set_votable!
     votable_type = request.fullpath.split('/').second.singularize
@@ -50,8 +36,4 @@ class VotesController < ApplicationController
   rescue NoMethodError, NameError
     render_error(:bad_request, 'Error', 'Not the correct vote data!')
   end
-
-  # def vote_params
-  #   { rating: params[:rating] }
-  # end
 end
