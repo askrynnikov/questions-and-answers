@@ -17,12 +17,24 @@ RSpec.describe VotesController, type: :controller do
           data = JSON.parse(response.body)
           expect(response).to have_http_status :success
 
-          expect(data['id']).to eq assigns(:vote).id
-          expect(data['votable_rating']).to eq question.rating
-          expect(data['votable_type']).to eq question.class.name.underscore
-          expect(data['votable_id']).to eq question.id
-          expect(data['action']).to eq 'create'
-          expect(data['message']).to eq 'Your vote has been accepted!'
+          schema = '{ "type": "object", "required": ["id", "votable_rating", "votable_type",
+                      "votable_id", "action", "message"] }'
+          expect(data).to match_response_schema(schema)
+
+          # response_data = %({"id": #{ vote.id },
+          #            "votable_rating": "#{ question.rating }",
+          #            "votable_type": "#{ question.class.name.underscore }",
+          #            "votable_id": #{ question.id },
+          #            "message": "Your vote has been accepted!",
+          #            "action": "create"})
+          # expect(response.body).to be_json_eql(response_data)
+
+          # expect(data['id']).to eq assigns(:vote).id
+          # expect(data['votable_rating']).to eq question.rating
+          # expect(data['votable_type']).to eq question.class.name.underscore
+          # expect(data['votable_id']).to eq question.id
+          # expect(data['action']).to eq 'create'
+          # expect(data['message']).to eq 'Your vote has been accepted!'
         end
       end
 
