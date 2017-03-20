@@ -1,58 +1,44 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_question, only: [:show, :update, :destroy]
+  before_action :build_answer, only: [:show]
   after_action :publish_question, only: [:create]
 
+  respond_to :js, only: [:update]
+
   def index
-    @questions = Question.all
+    respond_with(@questions = Question.all)
   end
 
   def show
-    @answer = @question.answers.build
-    @answer.attachments.build
+    respond_with @question
   end
 
   def new
-    @question = Question.new
-    @question.attachments.build
+    respond_with(@question = Question.new)
   end
 
-  # def edit
-  # end
+  def edit; end
 
   def create
-    @question = Question.create(questions_params)
-    @question.user = current_user
-
-    if @question.save
-      redirect_to @question, notice: 'Your question successfully created.'
-    else
-      flash.now[:error] = 'Your question is not created.'
-      render :new
-    end
+    respond_with(@question = current_user.questions.create(questions_params))
   end
 
   def update
-    @question.update(questions_params)
-
-    # if @question.update(questions_params)
-    #   redirect_to @question
-    # else
-    #   render :edit
-    # end
+    @question.update(questions_params) if current_user.author_of?(@question)
+    respond_with @question
   end
 
   def destroy
-    if current_user.author_of?(@question)
-      @question.destroy
-      flash[:notice] = 'Your question successfully deleted.'
-    else
-      flash[:alert] = 'Your are not author.'
-    end
-    redirect_to questions_path
+    @question.destroy if current_user.author_of?(@question)
+    respond_with(@question)
   end
 
   private
+
+  def build_answer
+    @answer = @question.answers.build
+  end
 
   def set_question
     @question = Question.find(params[:id])

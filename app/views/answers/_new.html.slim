@@ -3,4 +3,4 @@
   .answer-errors
   p= f.submit 'Your Answer'
   p= f.text_area :body
-  = render 'attachments/form', f: f
+  = render 'attachments/form', f: f, attach: @answer.attachments.build

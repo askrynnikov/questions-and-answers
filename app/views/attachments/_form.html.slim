@@ -1,6 +1,6 @@
 h3 Attachments
 .attachments
-  = f.fields_for :attachments do |attachment|
+  = f.fields_for :attachments, attach do |attachment|
     = render 'attachments/attachment_fields', f: attachment
   .links
     = link_to_add_association 'Add file', f, :attachments, partial: 'attachments/attachment_fields'
