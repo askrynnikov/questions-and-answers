@@ -10,5 +10,5 @@
   /  = f.fields_for :attachments do |a|
   /    = a.label :file
   /    = a.file_field :file
-  = render 'attachments/form', f: f
+  = render 'attachments/form', f: f, attach: @question.attachments.build
   p= f.submit 'Create'

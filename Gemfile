@@ -54,6 +54,8 @@ gem 'sprockets', '3.6.3'
 gem 'json-schema'
 gem 'json_spec'
 
+gem 'responders'
+
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
