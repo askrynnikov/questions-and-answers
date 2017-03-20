@@ -4,29 +4,37 @@ class AnswersController < ApplicationController
   before_action :set_answer, only: [:update, :destroy, :mark_best]
   after_action :publish_answer, only: [:create]
 
+  respond_to :js
 
   def mark_best
     @answer.mark_best if current_user.author_of?(@answer.question)
+    respond_with(@answer)
   end
 
   def create
-    @answer = @question.answers.new(answers_params)
-    @answer.user = current_user
-    @answer.save
+    respond_with(@answer = @question.answers.create(answers_params))
   end
 
   def destroy
     @answer.destroy if current_user.author_of?(@answer)
+    respond_with(@answer)
   end
 
   def update
     @answer.update(answers_params) if current_user.author_of?(@answer)
+    respond_with(@answer)
   end
 
   private
 
+  def interpolation_option
+    {resource_name: 'New awesome answer', time: @answer.created_at, user: current_user.email}
+  end
+
   def answers_params
-    params.require(:answer).permit(:body, attachments_attributes: [:file, :id, :_destroy])
+    params.require(:answer)
+      .permit(:body, attachments_attributes: [:file, :id, :_destroy])
+      .merge(user_id: current_user.id)
   end
 
   def set_question

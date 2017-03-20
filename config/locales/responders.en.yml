@@ -2,7 +2,8 @@ en:
   flash:
     actions:
       create:
-        notice: '%{resource_name} was successfully created at %{time} by %{user}.'
+#        notice: '%{resource_name} was successfully created at %{time} by %{user}.'
+        notice: '%{resource_name} was successfully created.'
         alert: '%{resource_name} could not be created.'
       update:
         notice: '%{resource_name} was successfully updated.'
@@ -15,5 +16,5 @@ en:
         notice: 'Your question successfully created.'
         alert: 'Not the correct question data!'
       destroy:
-        notice: 'Question was successfully deleted.'
+        notice: 'Your question successfully deleted.'
         :alert: 'You can not remove an question!'
