@@ -36,6 +36,10 @@ class QuestionsController < ApplicationController
 
   private
 
+  def interpolation_option
+    {resource_name: 'New awesome question', time: @question.created_at, user: current_user.email}
+  end
+
   def build_answer
     @answer = @question.answers.build
   end
