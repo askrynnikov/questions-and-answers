@@ -27,7 +27,7 @@ class AnswersController < ApplicationController
 
   private
 
-  def interpolation_option
+  def flash_interpolation_options
     {resource_name: 'New awesome answer', time: @answer.created_at, user: current_user.email}
   end
 

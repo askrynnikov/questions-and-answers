@@ -36,7 +36,7 @@ class QuestionsController < ApplicationController
 
   private
 
-  def interpolation_option
+  def flash_interpolation_options
     {resource_name: 'New awesome question', time: @question.created_at, user: current_user.email}
   end
 
