@@ -27,3 +27,5 @@ spec/examples.txt
 /public/tmp
 /public/uploads
 /public/spec
+
+.env
