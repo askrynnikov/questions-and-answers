@@ -108,4 +108,6 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'fuubar'
+
+  gem 'capybara-email'
 end

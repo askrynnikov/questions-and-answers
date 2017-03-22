@@ -29,7 +29,7 @@ RSpec.describe User, type: :model do
   end
 
   describe '.find_for_oauth' do
-    let!(:user) { create(:user) }
+    let!(:user) { create(:unconfirmed_user) }
     let(:auth) { OmniAuth::AuthHash.new(provider: 'facebook', uid: '123456') }
 
     context 'user already has authorization' do
@@ -77,7 +77,7 @@ RSpec.describe User, type: :model do
 
           it 'fills user email' do
             user = User.find_for_oauth(auth)
-            expect(user.email).to eq auth.info[:email]
+            expect(user.email).to eq auth.info.email
           end
 
           it 'creates authorization for user' do
