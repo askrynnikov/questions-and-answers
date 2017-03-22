@@ -10,13 +10,18 @@ RSpec.feature 'User sign up', %q{
     visit new_user_session_path #'/sign_in'
     click_on 'Sign up'
 
-    fill_in 'Email', with: Faker::Internet.unique.email
-    fill_in 'Password', with: pass = Faker::Internet.password
-    fill_in 'Password confirmation', with: pass
+    fill_in 'Email', with: email = Faker::Internet.unique.email
+    fill_in 'Password', with: password = Faker::Internet.password
+    fill_in 'Password confirmation', with: password
     click_on 'Sign up'
 
-    expect(page).to have_content "Welcome! You have signed up successfully."
-    expect(current_path).to eq root_path
+    expect(page).to have_content 'A message with a confirmation link has been sent to your email address'
+    expect(page).to have_content 'Please follow the link to activate your account.'
+
+    open_email(email)
+    current_email.click_link 'Confirm my account'
+    expect(page).to have_content 'Your email address has been successfully confirmed.'
+    expect(current_path).to eq new_user_session_path
   end
 
   scenario 'Registered user try to sign up' do
@@ -29,7 +34,5 @@ RSpec.feature 'User sign up', %q{
     click_on 'Sign up'
 
     expect(page).to have_content 'error prohibited this user from being saved'
-    # ??? expect(current_path).to eq new_user_session_path
   end
 end
-# save_and_open_page

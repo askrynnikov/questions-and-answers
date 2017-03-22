@@ -1,8 +1,11 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
   root to: "questions#index"
+
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
+
+  patch 'users/confirmation_email', to: 'users#confirmation_email', as: 'user_confirmation_email'
 
   concern :votable do
     resources :votes, only: [:create, :destroy]
