@@ -22,6 +22,8 @@ RSpec.describe UsersController, type: :controller do
       it 'user not found by token' do
         email = 'test0@test.com'
         patch :confirmation_email, params: { user: { email: email } }
+        save_and_open_page
+        expect(response).to render_template :index
         expect(response).to have_http_status :not_found
       end
 
