@@ -3,15 +3,17 @@ RSpec.describe UsersController, type: :controller do
     context 'with valid attributes' do
       it 'assigns @user by token' do
         user = create(:unconfirmed_user)
-        patch :confirmation_email, params: { user: { email: 'user@test.com' }, token: user.confirmation_token }
+        patch :confirmation_email, params: { user: { email: Faker::Internet.unique.email },
+                                             token: user.confirmation_token }
         expect(assigns(:user)).to eq user
       end
 
       it 'set unconfirmed email' do
         user = create(:unconfirmed_user)
         temporary_email = user.email
-        confirmed_email = 'user@test.com'
-        patch :confirmation_email, params: { user: { email: confirmed_email }, token: user.confirmation_token }
+        confirmed_email = Faker::Internet.unique.email
+        patch :confirmation_email, params: { user: { email: confirmed_email },
+                                             token: user.confirmation_token }
         user.reload
         expect(user.unconfirmed_email).to eq confirmed_email
         expect(user.email).to eq temporary_email
@@ -20,10 +22,8 @@ RSpec.describe UsersController, type: :controller do
 
     context 'user try confirm email with invalid attributes' do
       it 'user not found by token' do
-        email = 'test0@test.com'
+        email = Faker::Internet.unique.email
         patch :confirmation_email, params: { user: { email: email } }
-        save_and_open_page
-        expect(response).to render_template :index
         expect(response).to have_http_status :not_found
       end
 
@@ -31,7 +31,8 @@ RSpec.describe UsersController, type: :controller do
         it 'try use email another user' do
           another_user_email = create(:unconfirmed_user).email
           user = create(:user)
-          patch :confirmation_email, params: { user: { email: another_user_email }, token: user.confirmation_token }
+          patch :confirmation_email, params: { user: { email: another_user_email },
+                                               token: user.confirmation_token }
           expect(user.unconfirmed_email).to_not eq another_user_email
           expect(user.email).to_not eq another_user_email
         end
@@ -39,7 +40,8 @@ RSpec.describe UsersController, type: :controller do
         it 're-renders confirmation email template' do
           another_user_email = create(:unconfirmed_user).email
           user = create(:user)
-          patch :confirmation_email, params: { user: { email: another_user_email }, token: user.confirmation_token }
+          patch :confirmation_email, params: { user: { email: another_user_email },
+                                               token: user.confirmation_token }
           expect(response).to render_template :confirmation_email
         end
       end
@@ -47,7 +49,8 @@ RSpec.describe UsersController, type: :controller do
       context 'email empty' do
         it 'try use email blank' do
           user = create(:unconfirmed_user)
-          patch :confirmation_email, params: { user: { email: '' }, token: user.confirmation_token }
+          patch :confirmation_email, params: { user: { email: '' },
+                                               token: user.confirmation_token }
           expect(response).to have_http_status :unprocessable_entity
           expect(user.unconfirmed_email).to be_nil
           expect(user.email).to_not eq be_empty
@@ -55,7 +58,8 @@ RSpec.describe UsersController, type: :controller do
 
         it 're-renders confirmation email template' do
           user = create(:unconfirmed_user)
-          patch :confirmation_email, params: { user: { email: '' }, token: user.confirmation_token }
+          patch :confirmation_email, params: { user: { email: '' },
+                                               token: user.confirmation_token }
           expect(response).to render_template :confirmation_email
         end
       end
