@@ -4,12 +4,16 @@ class CommentsController < ApplicationController
   after_action :publish_comment, only: [:create]
 
   def create
-    @comment = @commentable.comments.new(comment_params)
-    @comment.user = current_user
-    if @comment.save
-      render json: CommentPresenter.new(@comment).as(:success_create)
+    if %w(answer question).include?(@commentable_type)
+      @comment = @commentable.comments.new(comment_params)
+      @comment.user = current_user
+      if @comment.save
+        render json: CommentPresenter.new(@comment).as(:success_create)
+      else
+        render_error(:unprocessable_entity, 'Error save', 'Not the correct comment data!')
+      end
     else
-      render_error(:unprocessable_entity, 'Error save', 'Not the correct comment data!')
+      render_error(:forbidden, 'Error save', 'Not the correct comment data!')
     end
   end
 
@@ -20,9 +24,9 @@ class CommentsController < ApplicationController
   end
 
   def set_commentable!
-    commentable_type = request.fullpath.split('/').second.singularize
-    commentable_id = params["#{commentable_type}_id"]
-    @commentable = commentable_type.classify.constantize.find(commentable_id)
+    @commentable_type = request.fullpath.split('/').second.singularize
+    commentable_id = params["#{@commentable_type}_id"]
+    @commentable = @commentable_type.classify.constantize.find(commentable_id)
   end
 
   def publish_comment
