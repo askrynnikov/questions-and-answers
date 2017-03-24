@@ -7,7 +7,7 @@ RSpec.feature 'Sign in OAuth', %q{
 } do
   context 'provider received email' do
     scenario 'sign in through facebook' do
-      received_email = 'email@example.test'
+      received_email = Faker::Internet.unique.email
       OmniAuth.config.add_mock(:facebook, uid: '123456', info: { email: received_email })
       visit new_user_session_path
       click_on 'Sign in with Facebook'
@@ -28,7 +28,7 @@ RSpec.feature 'Sign in OAuth', %q{
 
   context 'provider not received email' do
     scenario 'sign in through twitter' do
-      email = 'email@example.test'
+      email = Faker::Internet.unique.email
       OmniAuth.config.add_mock(:twitter, uid: '123456')
       visit new_user_session_path
       click_on 'Sign in with Twitter'
@@ -50,7 +50,7 @@ RSpec.feature 'Sign in OAuth', %q{
   end
 
   scenario 'email not confirmed' do
-    email = 'email@example.test'
+    email = Faker::Internet.unique.email
     OmniAuth.config.add_mock(:twitter, uid: '123456')
     visit new_user_session_path
     click_on 'Sign in with Twitter'
