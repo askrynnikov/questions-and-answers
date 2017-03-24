@@ -1,5 +1,5 @@
 class Authorization < ApplicationRecord
-  include HasUser
+  belongs_to :user
 
   validates :provider, :uid, presence: true
 end
