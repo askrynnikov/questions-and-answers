@@ -1,10 +1,11 @@
 class CommentsController < ApplicationController
+  COMMENTABLE_TYPE = %w(answer question)
   before_action :authenticate_user!
   before_action :set_commentable!, only: [:create]
   after_action :publish_comment, only: [:create]
 
   def create
-    if %w(answer question).include?(@commentable_type)
+    if COMMENTABLE_TYPE.include?(@commentable_type)
       @comment = @commentable.comments.new(comment_params)
       @comment.user = current_user
       if @comment.save

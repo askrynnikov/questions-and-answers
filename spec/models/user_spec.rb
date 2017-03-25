@@ -39,7 +39,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context 'user has not authorization' do
+    context 'user has no authorization' do
       context 'provider also returns email' do
         let(:auth) { OmniAuth::AuthHash.new(provider: 'facebook', uid: '123456', info: { email: user.email }) }
 
