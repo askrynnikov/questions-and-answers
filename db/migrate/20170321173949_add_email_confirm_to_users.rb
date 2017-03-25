@@ -5,7 +5,7 @@ class AddEmailConfirmToUsers < ActiveRecord::Migration[5.0]
     add_column :users, :confirmation_sent_at, :datetime
     add_column :users, :unconfirmed_email, :string
 
-    execute("UPDATE users SET confirmed_at = NOW()")
+    execute("UPDATE users SET confirmed_at = (now() at time zone 'utc')")
     add_index :users, :confirmation_token, unique: true
   end
 

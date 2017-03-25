@@ -13,7 +13,6 @@ RSpec.feature 'Add files to question', %q{
   #   visit new_question_path
   # end
 
-
   scenario 'User adds several files when asks question', js: true do
     sign_in(user)
     visit new_question_path
