@@ -28,6 +28,7 @@ class CommentsController < ApplicationController
     @commentable_type = request.fullpath.split('/').second.singularize
     commentable_id = params["#{@commentable_type}_id"]
     @commentable = @commentable_type.classify.constantize.find(commentable_id)
+    authorize @commentable
   end
 
   def publish_comment

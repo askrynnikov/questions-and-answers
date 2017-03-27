@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  after_action :verify_authorized, except: :confirmation_email
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
 

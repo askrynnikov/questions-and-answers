@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :update, :mark_best, :destroy]
+  before_action :authenticate_user!, only: [:create, :update, :destroy, :mark_best]
   before_action :set_question, only: [:create]
   before_action :set_answer, only: [:update, :destroy, :mark_best]
   after_action :publish_answer, only: [:create]
@@ -7,21 +7,22 @@ class AnswersController < ApplicationController
   respond_to :js
 
   def mark_best
-    @answer.mark_best if current_user.author_of?(@answer.question)
+    @answer.mark_best #if current_user.author_of?(@answer.question)
     respond_with(@answer)
   end
 
   def create
     respond_with(@answer = @question.answers.create(answers_params))
+    authorize @answer
   end
 
   def destroy
-    @answer.destroy if current_user.author_of?(@answer)
+    @answer.destroy #if current_user.author_of?(@answer)
     respond_with(@answer)
   end
 
   def update
-    @answer.update(answers_params) if current_user.author_of?(@answer)
+    @answer.update(answers_params) #if current_user.author_of?(@answer)
     respond_with(@answer)
   end
 
@@ -43,6 +44,7 @@ class AnswersController < ApplicationController
 
   def set_answer
     @answer = Answer.find(params[:id])
+    authorize @answer
   end
 
   def publish_answer
