@@ -1,10 +1,17 @@
 RSpec.describe AnswersController, type: :controller do
 
-  let(:question) { create(:question) }
-  let(:answer) { create(:answer, question: question) }
+  # let(:user) { create(:user) }
+  # let(:question) { create(:question) }
+  # let(:answer) { create(:answer, question: question, user: user) }
+
+  let(:user_question_creater) { create(:user) }
+  let(:question) { create(:question, user: user_question_creater) }
+  let(:user_answer_creater) { create(:user) }
+  let(:answer) { create(:answer, user: user_answer_creater, question: question) }
+  let(:user_other) { create(:user) }
 
   describe 'POST #create' do
-    sign_in_user
+    before { sign_in user_other }
 
     context 'with valid attributes' do
       it 'saves the new answer in the database' do
@@ -34,7 +41,7 @@ RSpec.describe AnswersController, type: :controller do
 
   describe 'PATCH #update' do
     context 'Authenticated user' do
-      sign_in_user
+      before { sign_in user_answer_creater }
 
       it 'assign the requested answer to @answer' do
         patch :update, params: {id: answer, answer: attributes_for(:answer), format: :js}
@@ -49,7 +56,7 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'Non-authenticated user' do
       it 'try update answer' do
-        patch :update, params: {id: answer, answer: attributes_for(:answer), format: :js}
+        patch :update, params: {id: answer, answer: attributes_for(:answer), format: :json}
         expect(assigns(:answer)).to_not eq answer
       end
     end
@@ -71,10 +78,11 @@ RSpec.describe AnswersController, type: :controller do
       end
 
       context 'not asker' do
-        sign_in_user
+        # sign_in_user
+        before { sign_in user_other }
 
         it 'marks best answer' do
-          patch :mark_best, params: { id: answer }, format: :js
+          patch :mark_best, params: { id: answer }, format: :json
           expect(answer.reload).to_not be_best
         end
       end

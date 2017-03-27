@@ -1,10 +1,13 @@
 RSpec.describe VotesController, type: :controller do
-  let(:question) { create(:question) }
-  let!(:vote_params) { {question_id: question, rating: 'up', format: :json} }
+
+  let(:user_question_creater) { create(:user) }
+  let(:question) { create(:question, user: user_question_creater) }
+  let!(:vote_params) { {question_id: question.id, rating: 'up', format: :json} }
+  let(:user_other) { create(:user) }
 
   describe 'POST #create' do
     context 'Authenticated user' do
-      sign_in_user
+      before { sign_in user_other }
 
       context 'with valid attributes' do
         it 'saves the new vote in the database' do
@@ -39,7 +42,7 @@ RSpec.describe VotesController, type: :controller do
       end
 
       context 'double voting' do
-        before { create(:vote, votable: question, user: @user) }
+        before { create(:vote, votable: question, user: user_other) }
 
         it 'tries vote again' do
           expect { post :create, params: vote_params }.to_not change(question.votes, :count)
@@ -124,9 +127,10 @@ RSpec.describe VotesController, type: :controller do
         it 'render error' do
           delete :destroy, params: {id: vote.id, format: :json}
           data = JSON.parse(response.body)
-          expect(response).to have_http_status :forbidden
-          expect(data['error']).to eq 'Error remove'
-          expect(data['error_message']).to eq 'You can not remove an vote!'
+          expect(response).to have_http_status :unauthorized
+          # expect(response).to have_http_status :forbidden
+          expect(data['error']).to eq 'You are not authorized to perform this action.'
+          # expect(data['error_message']).to eq 'You can not remove an vote!'
         end
       end
     end

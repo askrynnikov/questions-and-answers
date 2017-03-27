@@ -1,6 +1,12 @@
+require_relative "../../lib/pandit/votable_context"
+
 class VotesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_votable!, only: [:create]
+
+  def pundit_user
+    VotableContext.new(current_user, @votable)
+  end
 
   def create
     if !current_user.author_of?(@votable) &&
@@ -19,20 +25,23 @@ class VotesController < ApplicationController
 
   def destroy
     vote = Vote.find(params[:id])
-    if current_user.author_of?(vote)
+    authorize vote
+    # if current_user.author_of?(vote)
       vote.destroy
       render json: VotePresenter.new(vote).as(:success_destroy)
-    else
-      render_error(:forbidden, 'Error remove', 'You can not remove an vote!')
-    end
+    # else
+    #   render_error(:forbidden, 'Error remove', 'You can not remove an vote!')
+    # end
   end
 
   private
 
   def set_votable!
+    # binding.pry
     votable_type = request.fullpath.split('/').second.singularize
     votable_id = params["#{votable_type}_id"]
     @votable = votable_type.classify.constantize.find(votable_id)
+    authorize @votable
   rescue NoMethodError, NameError
     render_error(:bad_request, 'Error', 'Not the correct vote data!')
   end

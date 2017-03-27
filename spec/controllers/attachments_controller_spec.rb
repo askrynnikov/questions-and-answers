@@ -21,12 +21,13 @@ RSpec.describe AttachmentsController, type: :controller do
         sign_in_user
 
         it 'try delete attachmend file' do
-          expect { delete :destroy, params: {id: attachment}, format: :js }.to_not change(Attachment, :count)
+          expect { delete :destroy, params: {id: attachment}, format: :json }.to_not change(Attachment, :count)
         end
 
         it 'render destroy template' do
-          delete :destroy, params: {id: attachment}, format: :js
-          expect(response).to render_template :destroy
+          delete :destroy, params: {id: attachment}, format: :json
+          expect(response).to have_http_status :unauthorized
+          # expect(response).to render_template :destroy
         end
       end
     end

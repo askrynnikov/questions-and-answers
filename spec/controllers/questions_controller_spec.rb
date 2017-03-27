@@ -72,8 +72,9 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'PATCH #update' do
     context 'Authenticated user' do
-      sign_in_user
-
+      before do
+        sign_in(user)
+      end
       it 'assign the requested question to @question' do
         patch :update, params: {id: question, question: attributes_for(:question), format: :js}
         expect(assigns(:question)).to eq question
