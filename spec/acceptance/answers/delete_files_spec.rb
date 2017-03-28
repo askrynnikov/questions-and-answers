@@ -12,7 +12,7 @@ RSpec.feature 'Delete files of answer', %q{
   given!(:attachment) { create(:attachment, attachable: answer) }
 
   before do
-    @expected_file_name = 'spec_helper.rb'
+    @expected_file_name = 'attachment1.txt'
     @expected_href = "/uploads/attachment/file/1/#{@expected_file_name}"
   end
 

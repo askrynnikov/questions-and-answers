@@ -5,16 +5,15 @@ FactoryGirl.define do
 
   factory :user do
     email
-    password '12345678'
-    password_confirmation '12345678'
+    password { Faker::Internet.password(8, 20) }
+    password_confirmation { "#{password}" }
     confirmation_token { Faker::Internet.device_token }
     # confirmation_sent_at DateTime.now
     confirmed_at Time.now
-  end
 
-  factory :unconfirmed_user, class: 'User' do
-    email
-    password '123456'
-    password_confirmation '123456'
+    factory :unconfirmed_user do
+      confirmation_token nil
+      confirmed_at nil
+    end
   end
 end

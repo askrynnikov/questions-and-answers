@@ -16,10 +16,10 @@ RSpec.feature 'Add files to answer', %q{
     end
     scenario 'one file' do
       fill_in 'answer_body', with: 'text text'
-      attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
+      attach_file 'File', "#{Rails.root}/spec/support/mocks/attachment1.txt"
       click_on 'Your Answer'
       within '.answers' do
-        expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
+        expect(page).to have_link 'attachment1.txt', href: '/uploads/attachment/file/1/attachment1.txt'
       end
     end
 
@@ -27,13 +27,13 @@ RSpec.feature 'Add files to answer', %q{
       fill_in 'answer_body', with: 'text text'
       click_on 'Add file'
       inputs = all('input[type="file"]')
-      inputs[0].set("#{Rails.root}/spec/spec_helper.rb")
-      inputs[1].set("#{Rails.root}/spec/rails_helper.rb")
+      inputs[0].set("#{Rails.root}/spec/support/mocks/attachment1.txt")
+      inputs[1].set("#{Rails.root}/spec/support/mocks/attachment2.txt")
       click_on 'Your Answer'
 
       within '.answers' do
-        expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
-        expect(page).to have_link 'rails_helper.rb', href: '/uploads/attachment/file/2/rails_helper.rb'
+        expect(page).to have_link 'attachment1.txt', href: '/uploads/attachment/file/1/attachment1.txt'
+        expect(page).to have_link 'attachment2.txt', href: '/uploads/attachment/file/2/attachment2.txt'
       end
     end
   end
@@ -53,21 +53,21 @@ RSpec.feature 'Add files to answer', %q{
         fill_in 'answer_body', with: answer_text
         click_on 'Add file'
         inputs = all('input[type="file"]')
-        inputs[0].set("#{Rails.root}/spec/spec_helper.rb")
-        inputs[1].set("#{Rails.root}/spec/rails_helper.rb")
+        inputs[0].set("#{Rails.root}/spec/support/mocks/attachment1.txt")
+        inputs[1].set("#{Rails.root}/spec/support/mocks/attachment2.txt")
         click_on 'Your Answer'
 
         within '.answers' do
-          expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
-          expect(page).to have_link 'rails_helper.rb', href: '/uploads/attachment/file/2/rails_helper.rb'
+          expect(page).to have_link 'attachment1.txt', href: '/uploads/attachment/file/1/attachment1.txt'
+          expect(page).to have_link 'attachment2.txt', href: '/uploads/attachment/file/2/attachment2.txt'
         end
       end
 
       Capybara.using_session('guest') do
         within '.answers' do
           expect(page).to have_content answer_text
-          expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
-          expect(page).to have_link 'rails_helper.rb', href: '/uploads/attachment/file/2/rails_helper.rb'
+          expect(page).to have_link 'attachment1.txt', href: '/uploads/attachment/file/1/attachment1.txt'
+          expect(page).to have_link 'attachment2.txt', href: '/uploads/attachment/file/2/attachment2.txt'
         end
       end
     end

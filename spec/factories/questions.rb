@@ -4,13 +4,23 @@ FactoryGirl.define do
     body Faker::Lorem.paragraph
     user
 
-    trait :with_answers do
-      answers { [create(:answer), create(:answer)] }
-    end
-  end
+    factory :question_with_answers do
+      transient do
+        answers_count 2
+      end
 
-  factory :invalid_question, class: "Question" do
-    title nil
-    body nil
+      after(:create) do |question, evaluator|
+        create_list(:answer, evaluator.answers_count, question: question)
+      end
+    end
+
+    # trait :with_answers do
+    #   answers { [create(:answer), create(:answer)] }
+    # end
+
+    factory :invalid_question do
+      title nil
+      body nil
+    end
   end
 end
