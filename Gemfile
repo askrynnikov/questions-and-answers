@@ -61,6 +61,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 
 gem 'pundit'
+gem 'doorkeeper'
 
 
 group :development do
