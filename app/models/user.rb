@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :answers, dependent: :destroy
   has_many :authorizations
 
+  scope :without_user, ->(user) { where.not(id: user.id) }
+
   def self.find_for_oauth(auth)
     authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first
     return authorization.user if authorization
