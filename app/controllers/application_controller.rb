@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  after_action :verify_authorized, except: :index, unless: :devise_controller?
+  after_action :verify_authorized, unless: :devise_controller? #except: :index, look application_policy
 
   before_action :gon_user, unless: :devise_controller?
 

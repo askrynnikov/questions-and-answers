@@ -5,7 +5,7 @@ RSpec.describe CommentPolicy do
   subject { described_class }
 
   permissions :create? do
-    it 'grants access if user is not an guest' do
+    it 'grants access if user is not a guest' do
       expect(subject).to permit(user_other, Comment)
     end
 

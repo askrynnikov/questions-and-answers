@@ -28,12 +28,14 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#without_user' do
-    it 'without user' do
-      users = create_list(:user, 3)
-      without_user = users.second
-      User.without_user(without_user).each do |user|
-        expect(user).to_not eq without_user
+  describe 'scope' do
+    describe ':without_user' do
+      it 'without user' do
+        users = create_list(:user, 3)
+        without_user = users.second
+        User.without_user(without_user).each do |user|
+          expect(user).to_not eq without_user
+        end
       end
     end
   end
