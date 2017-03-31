@@ -1,4 +1,4 @@
-class Api::V1::ProfilesController < ApplicationController
+class Api::V1::ProfilesController < Api::V1::BaseController
   skip_after_action :verify_authorized
 
   def me
