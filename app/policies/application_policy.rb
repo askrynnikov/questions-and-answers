@@ -7,7 +7,8 @@ class ApplicationPolicy
   end
 
   def index?
-    true # false -> true & (in application_controller) after_action :verify_authorized, except: :index -> after_action :verify_authorized
+    # true # false -> true & (in application_controller) after_action :verify_authorized, except: :index -> after_action :verify_authorized
+    false # false -> true & (in application_controller) after_action :verify_authorized, except: :index -> after_action :verify_authorized
   end
 
   def show?
