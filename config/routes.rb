@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   resources :attachments, only: [:destroy]
 
-  namespace :api do
+  namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       resource :profiles do
         get :me, on: :collection
