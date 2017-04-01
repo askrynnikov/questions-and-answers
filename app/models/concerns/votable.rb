@@ -1,5 +1,4 @@
-module Votable
-  extend ActiveSupport::Concern
+concern :Votable do
   included do
     has_many :votes, as: :votable, dependent: :destroy
   end
