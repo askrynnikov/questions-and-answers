@@ -3,12 +3,12 @@ RSpec.describe 'Profile API' do
     context 'unauthorized' do
       it 'returns 401 status if ther is no access_token' do
         get '/api/v1/profiles/me', params: { format: :json }
-        expect(response.status).to eq 401
+        expect(response).to have_http_status :unauthorized
       end
 
       it 'returns 401 status if ther is access_token is invalid' do
         get '/api/v1/profiles/me', params: { format: :json, access_token: '123' }
-        expect(response.status).to eq 401
+        expect(response).to have_http_status :unauthorized
       end
     end
 
@@ -40,12 +40,12 @@ RSpec.describe 'Profile API' do
     context 'unauthorized' do
       it 'returns 401 status if ther is no access_token' do
         get '/api/v1/profiles', params: { format: :json }
-        expect(response.status).to eq 401
+        expect(response).to have_http_status :unauthorized
       end
 
       it 'returns 401 status if ther is access_token is invalid' do
         get '/api/v1/profiles', params: { format: :json, access_token: '123' }
-        expect(response.status).to eq 401
+        expect(response).to have_http_status :unauthorized
       end
     end
 

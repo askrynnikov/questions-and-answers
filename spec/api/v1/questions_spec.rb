@@ -5,12 +5,12 @@ RSpec.describe 'Questions API' do
     context 'unauthorized' do
       it 'returns 401 status if ther is no access_token' do
         get '/api/v1/questions', params: { format: :json }
-        expect(response.status).to eq 401
+        expect(response).to have_http_status :unauthorized
       end
 
       it 'returns 401 status if ther is access_token is invalid' do
         get '/api/v1/questions', params: { format: :json, access_token: 'invalid_token' }
-        expect(response.status).to eq 401
+        expect(response).to have_http_status :unauthorized
       end
     end
 
@@ -42,12 +42,12 @@ RSpec.describe 'Questions API' do
     context 'unauthorized' do
       it 'returns 401 status if ther is no access_token' do
         get "/api/v1/questions/#{question.id}", params: { format: :json }
-        expect(response.status).to eq 401
+        expect(response).to have_http_status :unauthorized
       end
 
       it 'returns 401 status if ther is access_token is invalid' do
         get "/api/v1/questions/#{question.id}", params: { format: :json, access_token: 'invalid_token' }
-        expect(response.status).to eq 401
+        expect(response).to have_http_status :unauthorized
       end
     end
 
@@ -105,12 +105,12 @@ RSpec.describe 'Questions API' do
     context 'unauthorized' do
       it 'returns 401 status if there is no access_token' do
         post '/api/v1/questions', params: { question: attributes_for(:question), format: :json }
-        expect(response.status).to eq 401
+        expect(response).to have_http_status :unauthorized
       end
 
       it 'returns 401 status if access_token is invalid' do
         post '/api/v1/questions', params: { question: attributes_for(:question), format: :json, access_token: 'invalid_token' }
-        expect(response.status).to eq 401
+        expect(response).to have_http_status :unauthorized
       end
     end
 
@@ -118,7 +118,7 @@ RSpec.describe 'Questions API' do
       context 'with valid attributes' do
         it 'returns 201 status code' do
           post '/api/v1/questions', params: { question: attributes_for(:question), format: :json, access_token: access_token.token }
-          # expect(response).to be_created
+          expect(response).to be_created
         end
 
         it 'saves the new question in the database' do
@@ -129,7 +129,7 @@ RSpec.describe 'Questions API' do
       context 'with invalid attributes' do
         it 'returns 422 status code' do
           post '/api/v1/questions', params: { question: attributes_for(:invalid_question), format: :json, access_token: access_token.token }
-          expect(response.status).to eq 422
+          expect(response).to have_http_status :unprocessable_entity
         end
 
         it 'does not save the question' do
