@@ -60,6 +60,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-odnoklassniki'
+gem 'omniauth-vkontakte'
 
 gem 'pundit'
 gem 'doorkeeper'
