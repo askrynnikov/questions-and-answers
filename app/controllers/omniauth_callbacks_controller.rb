@@ -7,6 +7,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def twitter
   end
 
+  def odnoklassniki
+  end
+
   private
 
   def sign_in_provider
