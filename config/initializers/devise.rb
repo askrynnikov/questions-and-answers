@@ -254,6 +254,8 @@ Devise.setup do |config|
 
   config.omniauth :odnoklassniki, ENV["OK_APP_ID"], ENV["OK_APP_SECRET_KEY"], public_key: ENV["OK_APP_PUBLIC_KEY"]
 
+  config.omniauth :vkontakte, ENV["VKONTAKTE_API_KEY"], ENV["VKONTAKTE_API_SECRET"], scope: [:email]
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

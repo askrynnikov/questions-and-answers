@@ -10,6 +10,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def odnoklassniki
   end
 
+  def vkontakte
+  end
+
   private
 
   def sign_in_provider
