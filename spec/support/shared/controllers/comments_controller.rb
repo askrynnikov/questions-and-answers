@@ -1,9 +1,5 @@
 RSpec.shared_examples_for 'Create Comment' do
-  let(:commentable_params) do
-    params = {}
-    params.store("#{commentable.class.name.underscore}_id", commentable.id)
-    params
-  end
+  let(:commentable_params) { Hash["#{commentable.class.name.underscore}_id", commentable.id] }
   let!(:comment_params) { commentable_params.merge(comment: attributes_for(:comment), format: :json) }
 
   context 'Authenticated user' do
@@ -21,15 +17,17 @@ RSpec.shared_examples_for 'Create Comment' do
         expect(Comment.last.user).to eq @user
       end
 
+      it 'render comment serialized json schema' do
+        post :create, params: comment_params
+        expect(response).to have_http_status :success
+        expect(response).to match_response_schema('comment')
+      end
+
       it 'render success json' do
         post :create, params: comment_params
         comment = commentable.comments.last
-        data = JSON.parse(response.body)
 
         expect(response).to have_http_status :success
-
-        schema = '{ "type": "object", "required": ["id", "content", "commentable_type", "commentable_id", "message"] }'
-        expect(data).to match_response_schema(schema)
 
         response_data = %({"id": #{ comment.id },
                      "content": "#{ comment.content }",
@@ -53,6 +51,7 @@ RSpec.shared_examples_for 'Create Comment' do
         post :create, params: invalid_comment_params
         data = JSON.parse(response.body)
         expect(response).to have_http_status :unprocessable_entity
+        expect(response).to match_response_schema('error')
         expect(data['error']).to eq 'Error save'
         expect(data['error_message']).to eq 'Not the correct comment data!'
       end

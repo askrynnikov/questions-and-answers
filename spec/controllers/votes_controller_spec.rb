@@ -32,15 +32,17 @@ RSpec.describe VotesController, type: :controller do
         it 'render success' do
           delete :destroy, params: {id: vote.id, format: :json}
           question.reload
-          data = JSON.parse(response.body)
           expect(response).to have_http_status :success
 
-          expect(data['id']).to eq vote.id
-          expect(data['votable_rating']).to eq question.rating
-          expect(data['votable_type']).to eq question.class.name.underscore
-          expect(data['votable_id']).to eq question.id
-          expect(data['action']).to eq 'delete'
-          expect(data['message']).to eq 'Your vote removed!'
+          expect(response).to match_response_schema('vote')
+
+          response_data = %({"id": #{ vote.id },
+                     "votable_rating": #{ question.rating },
+                     "votable_type": "#{ question.class.name.underscore }",
+                     "votable_id": #{ question.id },
+                     "message": "Your vote removed!",
+                     "action": "delete"})
+          expect(response.body).to be_json_eql(response_data)
         end
       end
 
@@ -55,9 +57,8 @@ RSpec.describe VotesController, type: :controller do
           delete :destroy, params: {id: vote.id, format: :json}
           data = JSON.parse(response.body)
           expect(response).to have_http_status :unauthorized
-          # expect(response).to have_http_status :forbidden
+          expect(response).to match_response_schema('error')
           expect(data['error']).to eq 'You are not authorized to perform this action.'
-          # expect(data['error_message']).to eq 'You can not remove an vote!'
         end
       end
     end
