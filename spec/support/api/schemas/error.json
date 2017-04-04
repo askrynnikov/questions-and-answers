@@ -1,0 +1,6 @@
+{
+  "type": "object",
+  "required": ["error"],
+    "error": { "type": "string" },
+    "error_message": { "type": "string" }
+}

@@ -1,11 +1,5 @@
 RSpec.shared_examples_for 'Create Vote' do
-  let(:votable_params) do
-    params = {}
-    params.store("#{votable.class.name.underscore}_id", votable.id)
-    params
-  end
-  # let!(:vote_params) { {question_id: question.id, rating: 'up', format: :json} }
-
+  let(:votable_params) { Hash["#{votable.class.name.underscore}_id", votable.id] }
   let!(:vote_params) { votable_params.merge(rating: 'up', format: :json) }
   let(:user_other) { create(:user) }
 
@@ -20,12 +14,8 @@ RSpec.shared_examples_for 'Create Vote' do
       it 'render success' do
         post :create, params: vote_params
         votable.reload
-        data = JSON.parse(response.body)
         expect(response).to have_http_status :success
-
-        schema = '{ "type": "object", "required": ["id", "votable_rating", "votable_type",
-                      "votable_id", "action", "message"] }'
-        expect(data).to match_response_schema(schema)
+        expect(response).to match_response_schema('vote')
       end
     end
 
@@ -63,6 +53,7 @@ RSpec.shared_examples_for 'Create Vote' do
         post :create, params: vote_params
         data = JSON.parse(response.body)
         expect(response).to have_http_status :forbidden
+        expect(response).to match_response_schema('error')
         expect(data['error']).to eq 'Error save'
         expect(data['error_message']).to eq 'You can not vote'
       end
