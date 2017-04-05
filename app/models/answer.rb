@@ -9,6 +9,8 @@ class Answer < ApplicationRecord
 
   scope :ordered, -> { order('best DESC, created_at') }
 
+  after_create :notify
+
   def mark_best
     transaction do
       Answer.where(question_id: question_id).update_all(best: false)
@@ -16,4 +18,9 @@ class Answer < ApplicationRecord
     end
   end
 
+  private
+
+  def notify
+    SubscriptionQuestionJob.perform_later(self)
+  end
 end
