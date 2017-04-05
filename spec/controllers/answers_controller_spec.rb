@@ -1,9 +1,4 @@
 RSpec.describe AnswersController, type: :controller do
-
-  # let(:user) { create(:user) }
-  # let(:question) { create(:question) }
-  # let(:answer) { create(:answer, question: question, user: user) }
-
   let(:user_question_creater) { create(:user) }
   let(:question) { create(:question, user: user_question_creater) }
   let(:user_answer_creater) { create(:user) }

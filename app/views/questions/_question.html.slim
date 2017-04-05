@@ -1,6 +1,8 @@
 h1 = question.title
 = render 'votes/vote', entity: question
 p = question.body
+.subscription
+  = render 'subscriptions/subscription', question: question
 = render 'attachments/attachments', entity: question
 
 - if current_user && current_user.author_of?(question)
