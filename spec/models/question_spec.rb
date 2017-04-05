@@ -2,6 +2,7 @@
 RSpec.describe Question, type: :model do
   describe 'associations' do
     it { should have_many(:answers).dependent(:destroy) }
+    it { should have_many(:subscriptions).dependent(:destroy) }
   end
 
   it_behaves_like 'has_user'
