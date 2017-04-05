@@ -29,3 +29,7 @@ spec/examples.txt
 /public/spec
 
 .env
+
+# Ignore redis binary dump (dump.rdb) files
+
+*.rdb
