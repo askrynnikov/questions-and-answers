@@ -1,0 +1,4 @@
+- if !user_subscription(question).present? && policy(question.subscriptions.build).create?
+  = link_to 'Subscribe', question_subscriptions_path(question), method: :post, remote: true
+- if user_can_unsubscribe?(question)
+  = link_to 'Unsubscribe', user_subscription(question), method: :delete, remote: true

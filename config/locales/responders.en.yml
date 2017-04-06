@@ -17,3 +17,10 @@ en:
       destroy:
         notice: 'Your question successfully deleted.'
         :alert: 'You can not remove an question!'
+    subscriptions:
+      create:
+        notice: 'Your subscription successfully created.'
+        alert: 'Not the correct subscription data!'
+      destroy:
+        notice: 'Your subscription successfully deleted.'
+        :alert: 'You can not remove an subscription!'

@@ -1,7 +1,14 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   use_doorkeeper
+
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   root to: "questions#index"
 
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
@@ -20,6 +27,7 @@ Rails.application.routes.draw do
     resources :answers, concerns: [:votable, :commentable], only: [:create, :update, :destroy], shallow: true do
       patch 'mark_best', on: :member
     end
+    resources :subscriptions, only: [:create, :destroy], shallow: true
   end
 
   resources :attachments, only: [:destroy]
