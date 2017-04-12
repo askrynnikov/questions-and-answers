@@ -34,6 +34,8 @@ spec/examples.txt
 
 *.rdb
 
+config/*.sphinx.conf
+db/sphinx
 
 # Ignore fo SublimeText
 # cache files for sublime text
