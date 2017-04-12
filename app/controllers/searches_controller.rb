@@ -10,6 +10,6 @@ class SearchesController < ApplicationController
   private
 
   def search_params
-    params.permit(:q, :page, scopes: [])
+    params.permit(:q, :page, :per_page, scopes: [])
   end
 end

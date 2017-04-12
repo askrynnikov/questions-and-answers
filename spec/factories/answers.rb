@@ -1,6 +1,6 @@
 FactoryGirl.define do
   sequence :body do |n|
-    "#{Faker::Lorem.paragraph} #{n} text"
+    "Answer text: #{Faker::Lorem.paragraph} #{n}"
   end
 
   factory :answer do

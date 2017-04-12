@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :question do
-    title Faker::Lorem.sentence + ' text'
-    body Faker::Lorem.paragraph
+    title Faker::Lorem.sentence
+    body "Question text: #{Faker::Lorem.paragraph}"
     user
 
     factory :question_with_answers do

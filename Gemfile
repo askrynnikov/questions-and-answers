@@ -74,6 +74,7 @@ gem 'whenever'
 
 gem 'mysql2'
 gem 'thinking-sphinx'
+gem 'kaminari'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
