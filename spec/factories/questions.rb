@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :question do
-    title Faker::Lorem.sentence
+    title Faker::Lorem.sentence + ' text'
     body Faker::Lorem.paragraph
     user
 
