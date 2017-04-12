@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
   end
 
+  resource :search, only: [:show]
+
   resources :questions, concerns: [:votable, :commentable] do
     resources :answers, concerns: [:votable, :commentable], only: [:create, :update, :destroy], shallow: true do
       patch 'mark_best', on: :member
