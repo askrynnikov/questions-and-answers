@@ -71,6 +71,9 @@ GEM
     capistrano-rbenv (2.1.1)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
+    capistrano-sidekiq (0.10.0)
+      capistrano
+      sidekiq (>= 3.4)
     capybara (2.13.0)
       addressable
       mime-types (>= 1.16)
@@ -435,6 +438,7 @@ DEPENDENCIES
   capistrano-bundle
   capistrano-rails
   capistrano-rbenv
+  capistrano-sidekiq
   capybara
   capybara-email
   capybara-webkit
