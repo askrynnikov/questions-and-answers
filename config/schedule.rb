@@ -17,7 +17,7 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 
-every 1.day do
+every 1.day, at: '3:59am' do
   runner 'DailyDigestJob.perform_now'
 end
 
