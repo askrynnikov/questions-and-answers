@@ -1,6 +1,72 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+
+  # config.action_mailer.default_url_options = {
+  #   host: ENV['HOST'] || 'localhost'
+  # }
+  # config.action_mailer.delivery_method = :smtp
+
+
+  # :address => "smtp.mailgun.org",
+  #   :port => 587,
+  #   :domain => "sandbox475078ca8cac4522a053eb51e0dfca2d.mailgun.org",
+
+  #
+  # config.action_mailer.default_options = {
+  #   from: ENV['PRODUCTION_EMAIL_USER']
+  # }
+
+  config.action_mailer.default_url_options = { host: ENV['PRODUCTION_HOST'] }
+  config.action_mailer.delivery_method = :smtp
+
+  # Gmail ошибок не но не работает
+  # config.action_mailer.smtp_settings = {
+  #   address: ENV['GMAIL_ADDRESS'],
+  #   port: ENV['GMAIL_PORT'],
+  #   domain: ENV['PRODUCTION_HOST'], #ENV['GMAIL_DOMAIN'],
+  #   user_name: ENV['GMAIL_USER_NAME'],
+  #   password: ENV['GMAIL_PASSWORD'],
+  #   authentication: :plain
+  # }
+
+  # config.action_mailer.smtp_settings = {
+  #   :address => 'smtp.mail.ru',
+  #   :port => 465,
+  #   :user_name => ENV['PRODUCTION_USER_NAME_SMTP'],
+  #   :password => ENV['PRODUCTION_PASSWORD_SMTP'],
+  #   :authentication => :plain,
+  #   :openssl_verify_mode => 'none',
+  #   :tls => true
+  # }
+
+  # MailGun песочница, продолжает выдавать ошибку, хотя от - указано
+  # config.action_mailer.smtp_settings = {
+  #   :authentication => :plain,
+  #   :address => ENV['PRODUCTION_SMTP'],
+  #   :port => ENV['PRODUCTION_EMAIL_PORT'],
+  #   :domain => ENV['PRODUCTION_EMAIL_DOMAIN'],
+  #   :user_name => ENV['PRODUCTION_EMAIL_USER'],
+  #   :password => ENV['PRODUCTION_EMAIL_PASSWORD']
+  # }
+
+  config.action_mailer.smtp_settings = {
+    :authentication => :plain,
+    :address => ENV['MAILGUN_SMTP'],
+    :port => ENV['MAILGUN_EMAIL_PORT'],
+    # :domain => ENV['MAILGUN_EMAIL_DOMAIN'],
+    :user_name => ENV['MAILGUN_EMAIL_USER'],
+    :password => ENV['MAILGUN_EMAIL_PASSWORD']
+  }
+
+  config.action_mailer.perform_caching = false
+
+  # Ignore bad email addresses and do not raise email delivery errors.
+  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
+  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -11,7 +77,7 @@ Rails.application.configure do
   config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
   # Disable serving static files from the `/public` folder by default since
@@ -38,18 +104,17 @@ Rails.application.configure do
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://.env.example.com/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/.env.example.*/ ]
-  config.action_cable.allowed_request_origins = [ "http://#{ENV['PRODUCTION_HOST']}" ]
+  config.action_cable.allowed_request_origins = ["http://#{ENV['PRODUCTION_HOST']}"]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
-  config.force_ssl = false
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -57,11 +122,6 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "qna_#{Rails.env}"
-  config.action_mailer.perform_caching = false
-
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -78,7 +138,7 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end

@@ -12,7 +12,18 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@.env.example.com'
+  # config.mailer_sender = 'please-change-me-at-config-initializers-devise@.env.example.com'
+
+  # Google без ош но не проходит
+  #  config.mailer_sender = '5101233test@gmail.com'
+  config.mailer_sender = 'notreplay@mg.kondidoc.com'
+
+  # MailGun
+  # config.mailer_sender = ENV['MAILGUN_EMAIL_USER']
+
+
+  # config.mailer_sender = 'an_skr@mail.ru'
+
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

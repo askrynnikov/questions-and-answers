@@ -78,6 +78,7 @@ gem 'kaminari'
 
 
 gem 'dotenv-rails'
+gem 'dotenv-deployment', require: 'dotenv/deployment'
 gem 'therubyracer'
 
 group :development do
