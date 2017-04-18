@@ -1,13 +1,19 @@
 default: &default
-  enable_star: true
   min_prefix_len: 0
-  min_infix_len: 1
+  min_infix_len: 3
   min_word_len: 1
-  charset_type: utf-8
   morphology: stem_ru
+  index_exact_words: 1
 production:
   <<: *default
-  mysql41: 9312
+  mysql41: 9306
+  pid_file: /home/deploy/qna/shared/tmp/searchd.pid
+  indices_location: /home/deploy/qna/shared/db/sphinx/production
+  configuration_file: /home/deploy/qna/shared/production.sphinx.conf
+  binlog_path: /home/deploy/qna/shared/binlog
+
+  log: /home/deploy/qna/shared/log/searchd.log
+  query_log: /home/deploy/qna/shared/log/searchd.query.log
 development:
   <<: *default
   mysql41: 9306
