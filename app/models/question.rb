@@ -8,7 +8,8 @@ class Question < ApplicationRecord
 
   validates :title, :body, :user_id, presence: true
 
-  scope :lastday, -> { where(created_at: 1.day.ago..Time.now) }
+  scope :lastday, -> { where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day) }
+  # scope :lastday, -> { where(created_at: 1.day.ago..Time.now) }
 
   after_create :subscribe
 

@@ -3,6 +3,6 @@ class DailyMailerPreview < ActionMailer::Preview
 
 # Preview this email at http://localhost:3000/rails/mailers/daily_mailer/digest
   def digest
-    DailyMailerMailer.digest
+    DailyMailer.digest
   end
 end

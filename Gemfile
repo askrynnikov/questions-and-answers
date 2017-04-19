@@ -70,7 +70,7 @@ gem 'oj'
 gem 'oj_mimic_json'
 
 gem 'sidekiq'
-gem 'whenever'
+gem 'whenever', require: false
 
 gem 'mysql2'
 gem 'thinking-sphinx'
@@ -78,7 +78,7 @@ gem 'kaminari'
 
 
 gem 'dotenv-rails'
-gem 'dotenv-deployment', require: 'dotenv/deployment'
+# gem 'dotenv-deployment', require: 'dotenv/deployment'
 gem 'therubyracer'
 
 group :development do

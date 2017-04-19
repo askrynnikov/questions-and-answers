@@ -23,7 +23,7 @@ set :format_options, command_output: true, log_file: "log/capistrano.log", color
 
 # Default value for :linked_files is []
 append :linked_files, "config/database.yml", "config/secrets.yml", ".env.production",
-       "config/production.sphinx.conf", "config/sidekiq.yml" #, "config/thinking_sphinx.yml"
+       "config/production.sphinx.conf", "config/sidekiq.yml" #, ".env" #, "config/thinking_sphinx.yml"
 
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system",
@@ -35,6 +35,9 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+# whenever Capistrano V3 Integration
+# set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do
@@ -44,4 +47,15 @@ namespace :deploy do
   end
 
   after :publishing, :restart
+
+  desc "Update crontab with whenever"
+  task :update_cron do
+    on roles(:app) do
+      within current_path do
+        execute :bundle, :exec, "whenever --update-crontab #{fetch(:application)}"
+      end
+    end
+  end
+
+  after :finishing, 'deploy:update_cron'
 end
