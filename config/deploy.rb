@@ -6,6 +6,7 @@ set :repo_url, "git@github.com:askrynnikov/questions-and-answers.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+# set :branch, "lesson42"
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/deploy/qna"
@@ -42,7 +43,8 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      execute :touch, release_path.join('tmp/restart.txt')
+      # execute :touch, release_path.join('tmp/restart.txt')
+      invoke 'unicorn:restart'
     end
   end
 

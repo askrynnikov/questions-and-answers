@@ -103,8 +103,10 @@ Rails.application.configure do
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://.env.example.com/cable'
+  # config.action_cable.url = "ws://localhost:3000/cable"
+  # config.action_cable.url = "ws://mg.kondidoc.com/cable"
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/.env.example.*/ ]
-  config.action_cable.allowed_request_origins = ["http://#{ENV['PRODUCTION_HOST']}"]
+  # config.action_cable.allowed_request_origins = ["http://#{ENV['PRODUCTION_HOST']}"]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true

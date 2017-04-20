@@ -28,10 +28,6 @@ class AnswersController < ApplicationController
 
   private
 
-  def flash_interpolation_options
-    {resource_name: 'New awesome answer', time: @answer.created_at, user: current_user.email}
-  end
-
   def answers_params
     params.require(:answer)
       .permit(:body, attachments_attributes: [:file, :id, :_destroy])

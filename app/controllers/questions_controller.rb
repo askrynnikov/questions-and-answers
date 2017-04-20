@@ -22,10 +22,12 @@ class QuestionsController < ApplicationController
     authorize @question
   end
 
-  def edit; end
+  def edit;
+  end
 
   def create
-    respond_with(@question = current_user.questions.create(questions_params))
+    @question = current_user.questions.create(questions_params)
+    respond_with @question
     authorize @question
   end
 
@@ -40,10 +42,6 @@ class QuestionsController < ApplicationController
   end
 
   private
-
-  def flash_interpolation_options
-    {resource_name: 'New awesome question', time: @question.created_at, user: current_user.email}
-  end
 
   def build_answer
     @answer = @question.answers.build
@@ -62,10 +60,10 @@ class QuestionsController < ApplicationController
     return if @question.errors.any?
     ActionCable.server.broadcast(
       'questions', @question
-      # ApplicationController.render(
-      #   partial: 'questions/question',
-      #   locals: { question: @question }
-      # )
+    # ApplicationController.render(
+    #   partial: 'questions/question',
+    #   locals: { question: @question }
+    # )
     )
   end
 end
