@@ -1,10 +1,10 @@
-h1 = question.title
 = render 'votes/vote', entity: question
-p = question.body
+- cache question do
+  h1 = question.title
+  p = question.body
+  = render 'attachments/attachments', entity: question
 .subscription
   = render 'subscriptions/subscription', question: question
-= render 'attachments/attachments', entity: question
-
 - if current_user && current_user.author_of?(question)
   .edit
     p = link_to 'Edit question', '', class: 'edit-question-link', data: { question_id: question.id }, remote: true

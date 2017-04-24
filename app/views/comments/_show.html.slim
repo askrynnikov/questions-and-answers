@@ -1,6 +1,7 @@
-h4 Comments
-.comments-list
-  = render commentable.comments
--if user_signed_in?
-  .comment-form
-    = render 'comments/form', commentable: commentable
+- cache ['comment_show', commentable] do
+  h4 Comments
+  .comments-list
+    = render commentable.comments
+  -if user_signed_in?
+    .comment-form
+      = render 'comments/form', commentable: commentable

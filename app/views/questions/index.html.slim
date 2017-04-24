@@ -1,7 +1,8 @@
-h2.title
-  | List questions
-h3.subtitle = link_to 'Ask question', new_question_path
+- cache collection_cache_key_for(:question) do
+  h2.title
+    | List questions
+  h3.subtitle = link_to 'Ask question', new_question_path
 
-.questions
-  - @questions.each do |question|
-    p= link_to question.title, question
+  .questions
+    - @questions.each do |question|
+      p= link_to question.title, question
